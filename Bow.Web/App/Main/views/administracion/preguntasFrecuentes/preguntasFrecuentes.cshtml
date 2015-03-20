@@ -1,0 +1,45 @@
+﻿<div class="container" ng-controller="app.views.administracion.preguntasFrecuentes as vm">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>@L("")Preguntas Frecuentes</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a ng-click="vm.abrirModalNueva(vm.paisId)" title="">@L("")Registrar Nueva Pregunta Frecuente <span class="glyphicon glyphicon-plus-sign font-size-16"></span></a>
+        </div>
+        <div class="col-md-6 text-right">
+            <p>{{vm.preguntasFrecuentes.length}} @L("")Preguntas Frecuentes</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>@L("")Pregunta</th>
+                        <th>@L("")Respuesta</th>
+                        <th class="text-center">@L("")Editar</th>
+                        <th class="text-center">@L("")Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="pregunta in vm.preguntasFrecuentes">
+                        <td>
+                            {{pregunta.pregunta}}
+                        </td>
+                        <td>
+                            {{pregunta.respuesta}}
+                        </td>
+                        <td class="text-center">
+                            <a ng-click="vm.abrirModalEditar(pregunta.id)" title="@L("")Editar pregunta frecuente"><span class="glyphicon glyphicon-pencil font-size-16"></span></a>
+                        </td>
+                        <td class="text-center">
+                            <a ng-click="vm.abrirModalEliminar(pregunta.id)" title="@L("")Eliminar pregunta frecuente"><span class="glyphicon glyphicon-trash font-size-16"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

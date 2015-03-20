@@ -1,0 +1,20 @@
+﻿.font-size-16 {
+  font-size: 16px;
+}
+.font-size-18 {
+  font-size: 16px;
+}
+.font-size-28 {
+  font-size: 28px;
+}
+.font-size-56 {
+  font-size: 56px;
+}
+table a {
+  font-weight: bold;
+  color: #06939c;
+}
+table a:hover {
+  color: #ffffff;
+}
+/*# sourceMappingURL=bow.css.map */
