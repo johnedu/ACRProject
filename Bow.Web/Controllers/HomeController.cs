@@ -6,9 +6,9 @@ namespace Bow.Web.Controllers
 {
     public class HomeController : BowControllerBase
     {
-        private IZonificacionService _zonificacionService;
+        private IAdministracionService _zonificacionService;
 
-        public HomeController(IZonificacionService zonificacionService)
+        public HomeController(IAdministracionService zonificacionService)
         {
             _zonificacionService = zonificacionService;
         }

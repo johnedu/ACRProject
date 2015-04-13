@@ -83,11 +83,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\DTOs\InputModels\DeleteMensajeInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\DeleteRespuestaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\DeletePreguntaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetPreguntaAleatoriaByDimensionAndJuegoInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetHistorialPuntajesUsuarioInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetAllRespuestasByPreguntaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetAllPreguntasByDimensionInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetRespuestaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetPreguntaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetMensajesSinLeerByUsuarioInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetPuntajeUsuarioInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\EnviarMensajeInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetAllMensajesByReceptorInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetAllMensajesByEmisorInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetUsuarioByCODAInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SavePuntajeInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SaveRespuestaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SavePreguntaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SaveUsuarioInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\UpdateRespuestaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\UpdatePreguntaInput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetHistorialPuntajesUsuarioOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasFrecuentesActivasOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllRespuestasByPreguntaOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasByDimensionOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetPreguntaAleatoriaByDimensionAndJuegoOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\PuntajeUsuarioOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetMensajesSinLeerByUsuarioOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetTipoProfesionalReintegradorOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetTipoPPROutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetRespuestaOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetPuntajeUsuarioOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetUsuarioByCODAOutput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetMensajeInput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllMensajesByReceptorOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllMensajesByEmisorOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetPreguntaOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\MensajeOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetMensajeOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\RespuestasByPreguntaOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\PreguntasByDimensionOutput.cs" />
+    <Compile Include="Administracion\IAdministracionService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="BowApplicationModule.cs" />
     <Compile Include="BowAppServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilidades\AutoMapper\AutoMapperBaseProfile.cs" />
-    <Compile Include="Administracion\AutoMapperZonificacionProfile.cs" />
+    <Compile Include="Administracion\AutoMapperAdministracionProfile.cs" />
     <Compile Include="Administracion\DTOs\InputModels\DeletePreguntaFrecuenteInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetPreguntaFrecuenteInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\SavePreguntaFrecuenteInput.cs" />
@@ -95,17 +139,16 @@
     <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasFrecuentesOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetPreguntaFrecuenteOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\PreguntaFrecuenteOutput.cs" />
-    <Compile Include="Administracion\IZonificacionService.cs" />
-    <Compile Include="Administracion\ZonificacionService.cs" />
+    <Compile Include="Administracion\AdministracionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bow.Core\Bow.Core.csproj">
+    <ProjectReference Include="..\Bow.Core\ACRProject.Core.csproj">
       <Project>{17298EA0-AF73-4F30-B6F1-2066100D7D74}</Project>
-      <Name>Bow.Core</Name>
+      <Name>ACRProject.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

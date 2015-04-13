@@ -16,30 +16,6 @@ namespace Bow.Web
             context.Manager.MainMenu
                 .AddItem(
                     new MenuItemDefinition(
-                        "menu_juegos",
-                        new LocalizableString("menu_juegos", BowConsts.LocalizationSourceName),
-                        icon: "fa fa-gamepad"
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "menu_juegos_millonario",
-                                new LocalizableString("menu_juegos_millonario", BowConsts.LocalizationSourceName),
-                                url: "#/juegos/millonario"
-                            )
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "menu_juegos_falso_verdadero",
-                                new LocalizableString("menu_juegos_falso_verdadero", BowConsts.LocalizationSourceName),
-                                url: "#/juegos/falsoVerdadero"
-                            )
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "menu_juegos_pasapalabras",
-                                new LocalizableString("menu_juegos_pasapalabras", BowConsts.LocalizationSourceName),
-                                url: "#/juegos/pasapalabras"
-                            )
-                        )
-                ).AddItem(
-                    new MenuItemDefinition(
                         "menu_administracion",
                         new LocalizableString("menu_administracion", BowConsts.LocalizationSourceName),
                         icon: "fa fa-cogs"
@@ -48,6 +24,12 @@ namespace Bow.Web
                                 "menu_administracion_preguntasFrecuentes",
                                 new LocalizableString("menu_administracion_preguntasFrecuentes", BowConsts.LocalizationSourceName),
                                 url: "#/administracion/preguntasFrecuentes"
+                            )
+                        ).AddItem(
+                            new MenuItemDefinition(
+                                "menu_administracion_preguntasJuegos",
+                                new LocalizableString("menu_administracion_preguntasJuegos", BowConsts.LocalizationSourceName),
+                                url: "#/administracion/preguntasJuegos"
                             )
                         )
                 );

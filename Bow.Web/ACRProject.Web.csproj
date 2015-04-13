@@ -222,6 +222,12 @@
     <Content Include="App\Main\styles\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalGestionarRespuestas.js" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEditarPreguntasJuego.js" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEliminarPreguntasJuego.js" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalNuevoPreguntasJuego.cshtml" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalNuevoPreguntasJuego.js" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\preguntasJuegos.js" />
     <Content Include="App\Main\views\home\modalPrueba.js" />
     <Content Include="App\Main\views\layout\header.js" />
     <Content Include="App\Main\views\layout\layout.js" />
@@ -380,6 +386,10 @@
     <Content Include="App\Main\views\administracion\preguntasFrecuentes\partials\modalEditarPreguntasFrecuentes.cshtml" />
     <Content Include="App\Main\views\administracion\preguntasFrecuentes\partials\modalEliminarPreguntasFrecuentes.cshtml" />
     <Content Include="App\Main\views\administracion\preguntasFrecuentes\partials\modalNuevoPreguntasFrecuentes.cshtml" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEditarPreguntasJuego.cshtml" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEliminarPreguntasJuego.cshtml" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\preguntasJuegos.cshtml" />
+    <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalGestionarRespuestas.cshtml" />
     <None Include="Properties\PublishProfiles\Bow Local.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Pruebas.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -1170,21 +1180,21 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bow.Application\Bow.Application.csproj">
+    <ProjectReference Include="..\Bow.Application\ACRProject.Application.csproj">
       <Project>{EDF5D964-4C0F-4F19-B674-58A38A5E5401}</Project>
-      <Name>Bow.Application</Name>
+      <Name>ACRProject.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bow.Core\Bow.Core.csproj">
+    <ProjectReference Include="..\Bow.Core\ACRProject.Core.csproj">
       <Project>{17298ea0-af73-4f30-b6f1-2066100d7d74}</Project>
-      <Name>Bow.Core</Name>
+      <Name>ACRProject.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bow.EntityFramework\Bow.EntityFramework.csproj">
+    <ProjectReference Include="..\Bow.EntityFramework\ACRProject.EntityFramework.csproj">
       <Project>{3979F157-DEB0-4878-AB1D-4CEF6B5A1300}</Project>
-      <Name>Bow.EntityFramework</Name>
+      <Name>ACRProject.EntityFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Bow.WebApi\Bow.WebApi.csproj">
+    <ProjectReference Include="..\Bow.WebApi\ACRProject.WebApi.csproj">
       <Project>{5EB52D3D-09FD-463A-B02A-8D9856BD3724}</Project>
-      <Name>Bow.WebApi</Name>
+      <Name>ACRProject.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

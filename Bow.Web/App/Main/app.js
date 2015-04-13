@@ -53,6 +53,11 @@
                     templateUrl: '/App/Main/views/administracion/preguntasFrecuentes/preguntasFrecuentes.cshtml',
                     menu: 'menu_administracion_preguntasFrecuentes'
                 })
+                .state('preguntasJuegos', {
+                    url: '/administracion/preguntasJuegos',
+                    templateUrl: '/App/Main/views/administracion/preguntasJuegos/preguntasJuegos.cshtml',
+                    menu: 'menu_administracion_preguntasJuegos'
+                })
                 .state('about', {
                     url: '/about',
                     templateUrl: '/App/Main/views/about/about.cshtml',

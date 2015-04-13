@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bow.Administracion.DTOs.InputModels
 {
-    public class DeletePreguntaFrecuenteInput : EntityDto
+    public class DeletePreguntaFrecuenteInput : EntityDto, IInputDto
     {
     }
 }

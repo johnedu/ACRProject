@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Bow.Administracion.DTOs.InputModels
 {
-    public class GetPreguntaFrecuenteInput : EntityDto
+    public class GetPreguntaFrecuenteInput : EntityDto, IInputDto
     {
     }
 }

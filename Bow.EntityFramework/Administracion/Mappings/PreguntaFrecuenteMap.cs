@@ -16,8 +16,11 @@ namespace Bow.Administracion.Mappings
             //Atributos
             Property(faq => faq.Pregunta).HasMaxLength(200);
             Property(faq => faq.Pregunta).IsRequired();
+
             Property(faq => faq.Respuesta).HasMaxLength(300);
             Property(faq => faq.Respuesta).IsRequired();
+
+            Property(faq => faq.EstadoActiva).IsRequired();
 
             //Tabla
             ToTable("pregunta_frecuente");

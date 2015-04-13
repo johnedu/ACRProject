@@ -1,16 +1,23 @@
 ﻿(function () {
-    angular.module('app').controller('modalEditarPreguntasFrecuentesController', ['$scope', '$modalInstance', 'preguntaEditar', 'abp.services.app.zonificacion',
-        function ($scope, $modalInstance, preguntaEditar, zonificacionService) {
+    angular.module('app').controller('modalEditarPreguntasFrecuentesController', ['$scope', '$modalInstance', 'preguntaEditar', 'abp.services.app.administracion',
+        function ($scope, $modalInstance, preguntaEditar, administracionService) {
 
             $scope.codigoPregunta = preguntaEditar;
 
-            zonificacionService.getPreguntaFrecuente({ id: preguntaEditar })
+            $scope.preguntaFrecuente = {
+                id: '',
+                pregunta: '',
+                respuesta: '',
+                estadoActiva: true
+            };
+
+            administracionService.getPreguntaFrecuente({ id: preguntaEditar })
                 .success(function (data) {
                     $scope.preguntaFrecuente = data;
                 });
 
             $scope.okModal = function () {
-                zonificacionService.updatePreguntaFrecuente({ id: preguntaEditar, pregunta: $scope.preguntaFrecuente.pregunta, respuesta: $scope.preguntaFrecuente.respuesta })
+                administracionService.updatePreguntaFrecuente($scope.preguntaFrecuente)
                     .success(function () {
                         $modalInstance.close($scope.preguntaFrecuente.pregunta);
                     }).error(function (error) {
