@@ -1,16 +1,16 @@
 ﻿(function () {
-    angular.module('app').controller('modalEliminarPreguntasFrecuentesController', ['$scope', '$modalInstance', 'preguntaEliminar', 'abp.services.app.administracion',
+    angular.module('app').controller('modalEliminarPreguntasJuegoController', ['$scope', '$modalInstance', 'preguntaEliminar', 'abp.services.app.administracion',
         function ($scope, $modalInstance, preguntaEliminar, administracionService) {
 
-            administracionService.getPreguntaFrecuente({ id: preguntaEliminar })
+            administracionService.getPregunta({ id: preguntaEliminar })
                 .success(function (data) {
-                    $scope.preguntaFrecuente = data;
+                    $scope.pregunta = data;
                 });
 
             $scope.okModal = function () {
-                administracionService.deletePreguntaFrecuente({ id: preguntaEliminar })
+                administracionService.deletePregunta({ id: preguntaEliminar })
                     .success(function () {
-                        $modalInstance.close($scope.preguntaFrecuente.pregunta);
+                        $modalInstance.close($scope.pregunta.texto);
                     }).error(function (error) {
                        
                         $scope.mensajeError = error.message;

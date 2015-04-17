@@ -1,7 +1,7 @@
 ﻿<div class="modal-header">
     <div class="row">
         <div class="col-md-10">
-            <h2>{{nombreInfoTributaria}}</h2>
+            <h2>{{preguntaTexto}}</h2>
         </div>
         <div class="col-md-2 text-right">
             <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="cancelModal()"></button>
@@ -17,10 +17,10 @@
             <div ng-show="!mostrarFormulario">
                 <div class="row">
                     <div class="col-md-6">
-                        <a ng-click="mostrarFormularioNuevaInfoTributaria()" title="@L("empresas_infoTributaria_opciones_btnNuevo_tooltip")">@L("empresas_infoTributaria_opciones_btnNuevo_nombre") <span class="glyphicon glyphicon-plus-sign font-size-16"></span></a>
+                        <a ng-click="mostrarFormularioNuevaRespuesta()" title="@L("")Nueva Respuesta">@L("")Nueva Respuesta <span class="glyphicon glyphicon-plus-sign font-size-16"></span></a>
                     </div>
                     <div class="col-md-6 text-right">
-                        <p>{{opcionesInfoTributaria.totalFilas}} <span ng-show="opcionesInfoTributaria.totalFilas == '1'">@L("empresas_infoTributaria_opciones_tabla_conteo_1registro")</span><span ng-hide="opcionesInfoTributaria.totalFilas == '1'">@L("empresas_infoTributaria_opciones_tabla_conteo_masde1registro")</span></p>
+                        <p>{{respuestasPregunta.totalFilas}} <span ng-show="opcionesInfoTributaria.totalFilas == '1'">@L("")Respuesta</span><span ng-hide="opcionesInfoTributaria.totalFilas == '1'">@L("")Respuestas</span></p>
                     </div>
                 </div>
                 <div class="row">
@@ -28,25 +28,33 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>@L("empresas_infoTributaria_opciones_tabla_nombre_titulo")</th>
-                                    <th class="text-center">@L("empresas_infoTributaria_opciones_tabla_editar_titulo")</th>
-                                    <th class="text-center">@L("empresas_infoTributaria_opciones_tabla_eliminar_titulo")</th>
+                                    <th>@L("")Texto</th>
+                                    <th class="text-center">@L("")Comodin 50/50</th>
+                                    <th class="text-center">@L("")Correcta</th>
+                                    <th class="text-center">@L("")Editar</th>
+                                    <th class="text-center">@L("")Eliminar</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="opcionInfoTributaria in opcionesInfoTributaria.filasMostrar track by $index">
+                                <tr ng-repeat="respuesta in respuestasPregunta.filasMostrar track by $index">
                                     <td>
-                                        <strong>{{opcionInfoTributaria.nombre}}</strong>
+                                        <strong>{{respuesta.texto}}</strong>
                                     </td>
                                     <td class="text-center">
-                                        <a ng-click="mostrarFormularioEditarInfoTributaria(opcionInfoTributaria.id)" title="@L("empresas_infoTributaria_opciones_tabla_editar_tooltip")"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <span ng-show="respuesta.comodin50_50" class="glyphicon glyphicon-check"></span>
                                     </td>
                                     <td class="text-center">
-                                        <a ng-click="eliminarOpcionInfoTributaria(opcionInfoTributaria.id, $index)" ng-show="!mensajeEliminar[$index]" title="@L("empresas_infoTributaria_opciones_tabla_eliminar_tooltip")"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <span ng-show="respuesta.respuestaVerdadera" class="glyphicon glyphicon-check"></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a ng-click="mostrarFormularioEditarRespuesta(respuesta.id)" title="@L("empresas_infoTributaria_opciones_tabla_editar_tooltip")"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a ng-click="eliminarOpcionInfoTributaria($index)" ng-show="!mensajeEliminar[$index]" title="@L("")Eliminar la respuesta"><span class="glyphicon glyphicon-trash"></span></a>
                                         <div ng-show="mensajeEliminar[$index]">
-                                            @L("empresas_infoTributaria_opciones_tabla_eliminar_confirmar")<br />
-                                            <button class="btn btn-success btn-xs" ng-click="eliminarOpcionInfoTributariaOk(opcionInfoTributaria.id, $index)">@L("empresas_infoTributaria_opciones_tabla_eliminar_confirmar_si")</button>
-                                            <button class="btn btn-danger btn-xs" ng-click="eliminarCancel($index)">@L("empresas_infoTributaria_opciones_tabla_eliminar_confirmar_no")</button>
+                                            @L("")¿Está seguro?<br />
+                                            <button class="btn btn-success btn-xs" ng-click="eliminarOpcionInfoTributariaOk(respuesta.id, $index)">@L("")Si</button>
+                                            <button class="btn btn-danger btn-xs" ng-click="eliminarCancel($index)">@L("")No</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -55,30 +63,43 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <pagination items-per-page="opcionesInfoTributaria.filasPorPagina"
-                                total-items="opcionesInfoTributaria.totalFilas"
-                                ng-model="opcionesInfoTributaria.paginaActual"
-                                ng-change="opcionesInfoTributaria.pageChanged()"
+                    <pagination items-per-page="respuestasPregunta.filasPorPagina"
+                                total-items="respuestasPregunta.totalFilas"
+                                ng-model="respuestasPregunta.paginaActual"
+                                ng-change="respuestasPregunta.pageChanged()"
                                 class="pagination-sm"></pagination>
                 </div>
             </div>
             <div ng-show="mostrarFormulario">
-                <form role="form" name="formNuevaOpcionInfoTributaria">
-                    <label class="control-label" ng-show="accionFormulario == 'Agregar'">@L("empresas_infoTributaria_opciones_form_nuevo_titulo")</label>
-                    <label class="control-label" ng-show="accionFormulario == 'Editar'">@L("empresas_infoTributaria_opciones_form_editar_titulo")</label>
-                    <br /><br />
-                    <div class="form-group" ng-class="{'has-error' : formNuevaOpcionInfoTributaria.iptNombreOpcionInfoTributaria.$dirty && formNuevaOpcionInfoTributaria.iptNombreOpcionInfoTributaria.$invalid }">
-                        <label class="control-label" for="iptNombreInfoTributaria">@L("empresas_infoTributaria_opciones_form_nuevo_nombre")</label>
-                        <input type="text" class="form-control" id="iptNombreOpcionInfoTributaria" name="iptNombreOpcionInfoTributaria" placeholder="@L("empresas_infoTributaria_opciones_form_nuevo_nombre_tooltip")" ng-model="opcionInfoTributaria.nombre" required maxlength="50" />
-                        <div ng-show="formNuevaOpcionInfoTributaria.iptNombreOpcionInfoTributaria.$dirty && formNuevaOpcionInfoTributaria.iptNombreOpcionInfoTributaria.$invalid">
-                            <small ng-show="formNuevaOpcionInfoTributaria.iptNombreOpcionInfoTributaria.$error.required" class="text-danger">
-                                @L("empresas_infoTributaria_opciones_form_nuevo_nombre_requerido")
+                <form role="form" name="formNuevaRespuesta">
+                    <div class="form-group" ng-class="{'has-error' : formNuevaRespuesta.iptTexto.$dirty && formNuevaRespuesta.iptTexto.$invalid }">
+                        <label class="control-label" for="iptTexto">@L("")Texto</label>
+                        <input type="text" class="form-control" id="iptTexto" name="iptTexto" placeholder="@L("")Texto de la respuesta" ng-model="respuesta.texto" required maxlength="300" />
+                        <div ng-show="formNuevaRespuesta.iptTexto.$dirty && formNuevaRespuesta.iptTexto.$invalid">
+                            <small ng-show="formNuevaRespuesta.iptTexto.$error.required" class="text-danger">
+                                @L("")El texto es requerido
                             </small>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" ng-model="respuesta.comodin50_50" />&nbsp;&nbsp;&nbsp;
+                                <label class="control-label">@L("")Comodin 50/50</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" ng-model="respuesta.respuestaVerdadera" />&nbsp;&nbsp;&nbsp;
+                                <label class="control-label">@L("")Respuesta Correcta</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-12 text-right">
-                        <button type="button" class="btn btn-success" ng-click="guardarModificarOpcionInfoTributaria()" ng-disabled="formNuevaOpcionInfoTributaria.$invalid">@L("empresas_infoTributaria_opciones_form_nuevo_btnguardar")</button>
-                        <button type="button" class="btn btn-danger" ng-click="cancelFormulario()">@L("empresas_infoTributaria_opciones_form_nuevo_btncancelar")</button>
+                        <button type="button" class="btn btn-success" ng-click="guardarModificarRespuesta()" ng-disabled="formNuevaRespuesta.$invalid">@L("")Guardar</button>
+                        <button type="button" class="btn btn-danger" ng-click="cancelFormulario()">@L("")Cancelar</button>
                     </div>
                 </form>
             </div>

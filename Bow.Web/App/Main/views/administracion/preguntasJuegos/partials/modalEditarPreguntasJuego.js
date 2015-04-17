@@ -1,18 +1,32 @@
 ﻿(function () {
-    angular.module('app').controller('modalEditarPreguntasFrecuentesController', ['$scope', '$modalInstance', 'preguntaEditar', 'abp.services.app.administracion',
-        function ($scope, $modalInstance, preguntaEditar, administracionService) {
+    angular.module('app').controller('modalEditarPreguntasJuegoController', ['$scope', '$modalInstance', 'preguntaEditar', 'preguntaTexto', 'abp.services.app.administracion',
+        function ($scope, $modalInstance, preguntaEditar, preguntaTexto, administracionService) {
 
-            $scope.codigoPregunta = preguntaEditar;
+            $scope.preguntaTexto = preguntaTexto;
 
-            administracionService.getPreguntaFrecuente({ id: preguntaEditar })
+            function cargarJuegos() {
+                administracionService.getAllJuegos().success(function (data) {
+                    $scope.listaJuegos = data.juegos;
+                });
+            }
+            cargarJuegos();
+
+            function cargarDimensiones() {
+                administracionService.getAllDimensiones().success(function (data) {
+                    $scope.listaDimensiones = data.dimensiones;
+                });
+            }
+            cargarDimensiones();
+
+            administracionService.getPregunta({ id: preguntaEditar })
                 .success(function (data) {
-                    $scope.preguntaFrecuente = data;
+                    $scope.pregunta = data;
                 });
 
             $scope.okModal = function () {
-                administracionService.updatePreguntaFrecuente({ id: preguntaEditar, pregunta: $scope.preguntaFrecuente.pregunta, respuesta: $scope.preguntaFrecuente.respuesta })
+                administracionService.updatePregunta($scope.pregunta)
                     .success(function () {
-                        $modalInstance.close($scope.preguntaFrecuente.pregunta);
+                        $modalInstance.close($scope.pregunta.texto);
                     }).error(function (error) {
                         $scope.mensajeError = error.message;
                     });
