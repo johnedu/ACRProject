@@ -148,7 +148,7 @@ namespace Bow.Administracion
 
         public GetMensajesSinLeerByUsuarioOutput GetMensajesSinLeerByUsuario(GetMensajesSinLeerByUsuarioInput usuario)
         {
-            return new GetMensajesSinLeerByUsuarioOutput { MensajesSinLeer = _mensajeRepositorio.GetAll().Where(m => m.UsuarioReceptorId == usuario.Id && m.FueLeido == false).Count() };
+            return new GetMensajesSinLeerByUsuarioOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAll().Where(m => m.UsuarioReceptorId == usuario.Id && m.FueLeido == false).OrderBy(m => m.Id)) };
         }
 
         /*********************************************************************************************
@@ -167,6 +167,12 @@ namespace Bow.Administracion
 
         public void SaveUsuario(SaveUsuarioInput usuario)
         {
+            if (usuario.Tipo.ToLower().Equals("ppr")) {
+                usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PPR).FirstOrDefault().Id;
+            }
+            else {
+                usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PROFESIONAL).FirstOrDefault().Id;
+            }
             _usuarioRepositorio.Insert(Mapper.Map<Usuario>(usuario));
         }
 

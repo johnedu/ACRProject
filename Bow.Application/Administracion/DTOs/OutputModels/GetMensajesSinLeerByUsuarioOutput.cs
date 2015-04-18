@@ -9,6 +9,6 @@ namespace Bow.Administracion.DTOs.OutputModels
 {
     public class GetMensajesSinLeerByUsuarioOutput : IOutputDto
     {
-        public int MensajesSinLeer { get; set; }
+        public List<MensajeOutput> Mensajes { get; set; }
     }
 }
