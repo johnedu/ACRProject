@@ -77,6 +77,16 @@ namespace Bow.Administracion
         GetAllJuegosOutput GetAllJuegos();
 
         GetAllDimensionesOutput GetAllDimensiones();
+
+        GetEntidadOutput GetEntidad(GetEntidadInput entidadInput);
+
+        GetAllEntidadesByDimensionOutput GetAllEntidadesByDimension(GetAllEntidadesByDimensionInput dimension);
+        
+        void SaveEntidad(SaveEntidadInput nuevaEntidad);
+
+        void DeleteEntidad(DeleteEntidadInput entidadEliminar);
+
+        void UpdateEntidad(SaveEntidadInput entidadUpdate);
     }
 }
 

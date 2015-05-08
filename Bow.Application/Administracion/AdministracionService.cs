@@ -380,7 +380,7 @@ namespace Bow.Administracion
 
         public GetAllEntidadesByDimensionOutput GetAllEntidadesByDimension(GetAllEntidadesByDimensionInput dimension)
         {
-            var listaEntidades = _entidadRepositorio.GetAll().Where(e => e.DimensionId == dimension.DimensionId);
+            var listaEntidades = _entidadRepositorio.GetAll().Where(e => e.DimensionId == dimension.DimensionId).ToList();
             return new GetAllEntidadesByDimensionOutput { Entidades = Mapper.Map<List<EntidadByDimensionOutput>>(listaEntidades) };
         }
 
@@ -391,7 +391,7 @@ namespace Bow.Administracion
             if (existeEntidad == null)
             {
                 nuevaEntidad.Fecha = DateTime.Now.ToString();
-                _preguntaRepositorio.Insert(Mapper.Map<Pregunta>(nuevaEntidad));
+                _entidadRepositorio.Insert(Mapper.Map<Entidad>(nuevaEntidad));
             }
             else
             {
@@ -413,7 +413,7 @@ namespace Bow.Administracion
             if (existeEntidad == null)
             {
                 entidadUpdate.Fecha = DateTime.Now.ToString();
-                _preguntaRepositorio.Update(Mapper.Map<Pregunta>(entidadUpdate));
+                _entidadRepositorio.Update(Mapper.Map<Entidad>(entidadUpdate));
             }
             else
             {
