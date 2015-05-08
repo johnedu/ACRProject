@@ -10,5 +10,6 @@ namespace Bow.Administracion.Repositorios
 {
     public interface IPreguntaRepositorio : IRepository<Pregunta>
     {
+        List<Pregunta> GetAllWithJuego(int DimensionId, int JuegoId);
     }
 }

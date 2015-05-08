@@ -46,7 +46,8 @@ namespace Bow.Administracion
             CreateMap<UpdatePreguntaInput, Pregunta>();
             CreateMap<Pregunta, GetPreguntaOutput>();
             CreateMap<Pregunta, GetPreguntaAleatoriaByDimensionAndJuegoOutput>();
-            CreateMap<Pregunta, PreguntasByDimensionOutput>();
+            CreateMap<Pregunta, PreguntasByDimensionOutput>()
+                .ForMember(dest => dest.Juego, opt => opt.MapFrom(src => src.JuegoPregunta.Nombre));
 
             //  Respuestas Juego
             CreateMap<SaveRespuestaInput, Respuesta>();
@@ -71,7 +72,11 @@ namespace Bow.Administracion
 
             CreateMap<Dimension, DimensionOutput>();
 
-            //  Respuestas Juego
+            //  Entidades Dimensiones
+            CreateMap<SaveEntidadInput, Entidad>();
+            CreateMap<UpdateEntidadInput, Entidad>();
+            CreateMap<Entidad, GetEntidadOutput>();
+            CreateMap<Entidad, EntidadByDimensionOutput>();
         }
     }
 }

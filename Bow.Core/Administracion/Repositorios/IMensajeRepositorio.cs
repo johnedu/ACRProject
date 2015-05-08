@@ -10,8 +10,10 @@ namespace Bow.Administracion.Repositorios
 {
     public interface IMensajeRepositorio : IRepository<Mensaje>
     {
-        List<Mensaje> GetAllMensajesByEmisor(int EmisorId);
+        List<Mensaje> GetAllMensajesByEmisor(string Emisor);
 
-        List<Mensaje> GetAllMensajesByReceptor(int ReceptorId);
+        List<Mensaje> GetAllMensajesByReceptor(string Receptor);
+
+        Mensaje GetMensajeByIdWithReceptorAndEmisor(int MensajeId);
     }
 }

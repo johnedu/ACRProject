@@ -18,5 +18,8 @@ namespace Bow.Administracion.DTOs.InputModels
         [Required]
         public bool RespuestaVerdadera { get; set; }
         public int PreguntaId { get; set; }
+        public bool EstadoActiva { get; set; }
+        public int Usuario { get; set; }
+        public string Fecha { get; set; }
     }
 }

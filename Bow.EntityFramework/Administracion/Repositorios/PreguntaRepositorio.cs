@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Bow.Administracion.Repositorios
 {
@@ -16,6 +17,11 @@ namespace Bow.Administracion.Repositorios
            : base(dbContextProvider)
         {
 
+        }
+
+        public List<Pregunta> GetAllWithJuego(int DimensionId, int JuegoId)
+        {
+            return GetAll().Where(p => p.DimensionId == DimensionId && p.JuegoId == JuegoId).Include(p => p.JuegoPregunta).OrderByDescending(p => p.Texto).ToList();
         }
     }
 }

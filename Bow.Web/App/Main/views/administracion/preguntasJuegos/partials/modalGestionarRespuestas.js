@@ -1,6 +1,6 @@
 ﻿(function () {
-    angular.module('app').controller('modalGestionarRespuestasController', ['$scope', '$modalInstance', 'preguntaId', 'preguntaTexto', 'abp.services.app.administracion',
-        function ($scope, $modalInstance, preguntaId, preguntaTexto, administracionService) {
+    angular.module('app').controller('modalGestionarRespuestasController', ['$scope', '$modalInstance', 'preguntaId', 'preguntaTexto', 'juego', 'abp.services.app.administracion',
+        function ($scope, $modalInstance, preguntaId, preguntaTexto, juego, administracionService) {
 
             ////Inicializando modelos
 
@@ -9,6 +9,8 @@
             $scope.preguntaTexto = preguntaTexto;
             $scope.mostrarFormulario = false;
             $scope.accionFormulario = "Agregar";
+            $scope.juego = juego;
+            $scope.btn_nuevo_disabled = false;
 
             $scope.respuesta = {
                 texto: '',
@@ -24,6 +26,20 @@
                 administracionService.getAllRespuestasByPregunta({ preguntaId: preguntaId })
                     .success(function (data) {
                         $scope.respuestasPregunta = bow.tablas.paginar(data.respuestas, 5);
+                        $scope.btn_nuevo_disabled = false;
+                        if ($scope.juego.toLowerCase() == 'falso o verdadero') {
+                            if (data.respuestas.length > 1) {
+                                $scope.btn_nuevo_disabled = true;
+                            }
+                        } else if ($scope.juego.toLowerCase() == 'millonario') {
+                            if (data.respuestas.length > 3) {
+                                $scope.btn_nuevo_disabled = true;
+                            }
+                        } else if ($scope.juego.toLowerCase() == 'pasapalabra') {
+                            if (data.respuestas.length > 0) {
+                                $scope.btn_nuevo_disabled = true;
+                            }
+                        }
                     });
             }
             cargarRespuestas();

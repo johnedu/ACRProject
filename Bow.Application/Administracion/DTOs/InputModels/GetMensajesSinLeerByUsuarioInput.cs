@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace Bow.Administracion.DTOs.InputModels
 {
-    public class GetMensajesSinLeerByUsuarioInput : EntityDto, IInputDto
+    public class GetMensajesSinLeerByUsuarioInput : IInputDto
     {
+        public string Usuario { get; set; }
     }
 }

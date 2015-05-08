@@ -23,6 +23,11 @@ namespace Bow.Administracion.Mappings
               .HasForeignKey(d => d.DimensionId)
               .WillCascadeOnDelete(false);
 
+            HasMany<Entidad>(e => e.EntidadesDimension)
+              .WithRequired(d => d.DimensionPregunta)
+              .HasForeignKey(d => d.DimensionId)
+              .WillCascadeOnDelete(false);
+
             //Tabla
             ToTable("dimension");
         }

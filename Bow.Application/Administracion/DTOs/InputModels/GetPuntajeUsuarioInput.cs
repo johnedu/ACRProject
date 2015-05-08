@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Bow.Administracion.DTOs.InputModels
 {
-    public class GetPuntajeUsuarioInput : EntityDto, IInputDto
+    public class GetPuntajeUsuarioInput : IInputDto
     {
+        public string Usuario { get; set; }
     }
 }

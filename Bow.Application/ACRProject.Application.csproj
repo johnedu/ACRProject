@@ -84,12 +84,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Administracion\DTOs\InputModels\DeleteMensajeInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\DeleteEntidadInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\DeleteRespuestaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\DeletePreguntaInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetAllEntidadesByDimensionInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetPreguntaAleatoriaByDimensionAndJuegoInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetHistorialPuntajesUsuarioInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetAllRespuestasByPreguntaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetAllPreguntasByDimensionInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\GetEntidadInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetRespuestaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetPreguntaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetMensajesSinLeerByUsuarioInput.cs" />
@@ -98,21 +101,26 @@
     <Compile Include="Administracion\DTOs\InputModels\GetAllMensajesByReceptorInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetAllMensajesByEmisorInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\GetUsuarioByCODAInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SaveEntidadInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\SavePuntajeInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\SaveRespuestaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\SavePreguntaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\SaveUsuarioInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\UpdateEntidadInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\UpdateRespuestaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\UpdatePreguntaInput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllDimensionesOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllJuegosOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllEntidadesByDimensionOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetHistorialPuntajesUsuarioOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasFrecuentesActivasOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllRespuestasByPreguntaOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasByDimensionOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetPreguntaAleatoriaByDimensionAndJuegoOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\DimensionOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetEntidadOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\JuegoOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\EntidadByDimensionOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\PuntajeUsuarioOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetMensajesSinLeerByUsuarioOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetTipoProfesionalReintegradorOutput.cs" />

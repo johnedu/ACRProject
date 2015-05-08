@@ -58,6 +58,11 @@
                     templateUrl: '/App/Main/views/administracion/preguntasJuegos/preguntasJuegos.cshtml',
                     menu: 'menu_administracion_preguntasJuegos'
                 })
+                .state('entidadesDimensiones', {
+                    url: '/administracion/entidadesDimensiones',
+                    templateUrl: '/App/Main/views/administracion/entidadesDimensiones/entidadesDimensiones.cshtml',
+                    menu: 'menu_administracion_entidadesDimensiones'
+                })
                 .state('about', {
                     url: '/about',
                     templateUrl: '/App/Main/views/about/about.cshtml',

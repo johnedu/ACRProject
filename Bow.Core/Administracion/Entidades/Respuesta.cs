@@ -15,5 +15,10 @@ namespace Bow.Administracion.Entidades
         public bool RespuestaVerdadera { get; set; }
         public int PreguntaId { get; set; }
         public Pregunta PreguntaRespuesta { get; set; }
+        public bool EstadoActiva { get; set; }
+        public string FechaCreacion { get; set; }
+        public int UsuarioIdCreacion { get; set; }
+        public string FechaModificacion { get; set; }
+        public int? UsuarioIdModificacion { get; set; }
     }
 }

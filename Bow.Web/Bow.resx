@@ -120,6 +120,9 @@
   <data name="menu_administracion" xml:space="preserve">
     <value>ADMINISTRACIÓN</value>
   </data>
+  <data name="menu_administracion_entidadesDimensiones" xml:space="preserve">
+    <value>Entidades de las Dimensiones</value>
+  </data>
   <data name="menu_administracion_preguntasFrecuentes" xml:space="preserve">
     <value>Preguntas Frecuentes</value>
   </data>
