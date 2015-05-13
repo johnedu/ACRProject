@@ -252,7 +252,9 @@ namespace Bow.Administracion
         {
             List<Pregunta> preguntas = _preguntaRepositorio.GetAll().Where(p => p.DimensionId == dimensionAndJuego.DimensionId && p.JuegoId == dimensionAndJuego.JuegoId).ToList();
             var rand = new Random();
-            return Mapper.Map<GetPreguntaAleatoriaByDimensionAndJuegoOutput>(preguntas[rand.Next(preguntas.Count())]);
+            GetPreguntaAleatoriaByDimensionAndJuegoOutput preguntaSeleccionada = Mapper.Map<GetPreguntaAleatoriaByDimensionAndJuegoOutput>(preguntas[rand.Next(preguntas.Count())]);
+            preguntaSeleccionada.Respuestas = GetAllRespuestasByPregunta(new GetAllRespuestasByPreguntaInput { PreguntaId = preguntaSeleccionada.Id }).Respuestas;
+            return preguntaSeleccionada;
         }
 
         /*********************************************************************************************

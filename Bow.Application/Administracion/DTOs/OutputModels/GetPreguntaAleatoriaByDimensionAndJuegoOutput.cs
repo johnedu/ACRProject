@@ -15,5 +15,6 @@ namespace Bow.Administracion.DTOs.OutputModels
         public string Nivel { get; set; }
         public string Pista { get; set; }
         public bool EstadoActiva { get; set; }
+        public List<RespuestasByPreguntaOutput> Respuestas { get; set; }
     }
 }
