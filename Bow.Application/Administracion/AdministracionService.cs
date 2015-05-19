@@ -192,7 +192,9 @@ namespace Bow.Administracion
 
         public GetHistorialPuntajesUsuarioOutput GetHistorialPuntajesUsuario(GetHistorialPuntajesUsuarioInput usuario)
         {
-            return new GetHistorialPuntajesUsuarioOutput { Puntajes = Mapper.Map<List<PuntajeUsuarioOutput>>(_puntajeRepositorio.GetAllHistorialPuntajesByUsuario(usuario.Usuario)) };
+            return new GetHistorialPuntajesUsuarioOutput { Puntajes = Mapper.Map<List<PuntajeUsuarioOutput>>(_puntajeRepositorio.GetAllHistorialPuntajesByUsuario(usuario.Usuario)),
+                                                           PuntajeTotal = _puntajeRepositorio.GetAll().Where(p => p.UsuarioPuntaje.Coda == usuario.Usuario).Sum(p => p.PuntajeValor)
+            };
         }
 
         /*********************************************************************************************
