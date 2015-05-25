@@ -11,7 +11,7 @@ namespace Bow.Administracion.DTOs.InputModels
     public class UpdateEntidadInput : EntityDto, IInputDto
     {
         [Required]
-        [MaxLength(200)]
+        [MaxLength(4096)]
         public string Texto { get; set; }
         [Required]
         public bool Comodin50_50 { get; set; }

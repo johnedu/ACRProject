@@ -214,7 +214,7 @@ namespace Bow.Administracion
 
         public void SavePregunta(SavePreguntaInput nuevaPregunta)
         {
-            Pregunta existePregunta = _preguntaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == nuevaPregunta.Texto.ToLower());
+            Pregunta existePregunta = _preguntaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == nuevaPregunta.Texto.ToLower() && p.DimensionId == nuevaPregunta.DimensionId && p.JuegoId == nuevaPregunta.JuegoId);
 
             if (existePregunta == null)
             {
@@ -223,7 +223,7 @@ namespace Bow.Administracion
             }
             else
             {
-                var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
+                var mensajeError = "Ya existe la pregunta";
                 throw new UserFriendlyException(mensajeError);
             }
         }
@@ -236,7 +236,7 @@ namespace Bow.Administracion
 
         public void UpdatePregunta(UpdatePreguntaInput preguntaUpdate)
         {
-            Pregunta existePregunta = _preguntaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == preguntaUpdate.Texto.ToLower() && p.Id != preguntaUpdate.Id);
+            Pregunta existePregunta = _preguntaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == preguntaUpdate.Texto.ToLower() && p.DimensionId == preguntaUpdate.DimensionId && p.JuegoId == preguntaUpdate.JuegoId && p.Id != preguntaUpdate.Id);
 
             if (existePregunta == null)
             {

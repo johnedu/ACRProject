@@ -11,10 +11,10 @@ namespace Bow.Administracion.DTOs.InputModels
     public class SaveEntidadInput : EntityDto, IInputDto
     {
         [Required]
-        [MaxLength(200)]
+        [MaxLength(512)]
         public string Nombre { get; set; }
         [Required]
-        [MaxLength(200)]
+        [MaxLength(4096)]
         public string Descripcion { get; set; }
         public int DimensionId { get; set; }
         public bool EstadoActiva { get; set; }

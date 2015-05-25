@@ -14,10 +14,10 @@ namespace Bow.Administracion.Mappings
         public PreguntaMap()
         {
             //Atributos
-            Property(d => d.Texto).HasMaxLength(300);
+            Property(d => d.Texto).HasMaxLength(4096);
             Property(d => d.Texto).IsRequired();
 
-            Property(d => d.Pista).HasMaxLength(300);
+            Property(d => d.Pista).HasMaxLength(4096);
             Property(d => d.Pista).IsRequired();
 
             Property(d => d.Nivel).HasMaxLength(1);

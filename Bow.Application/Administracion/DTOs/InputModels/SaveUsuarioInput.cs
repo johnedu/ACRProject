@@ -14,7 +14,7 @@ namespace Bow.Administracion.DTOs.InputModels
         [MaxLength(1000)]
         public string Coda { get; set; }
         [Required]
-        [MaxLength(100)]
+        [MaxLength(512)]
         public string Nombre { get; set; }
         public int TipoId { get; set; }
         public string Tipo { get; set; }

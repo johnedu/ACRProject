@@ -14,10 +14,10 @@ namespace Bow.Administracion.Mappings
         public MensajeMap()
         {
             //Atributos
-            Property(d => d.Titulo).HasMaxLength(200);
+            Property(d => d.Titulo).HasMaxLength(512);
             Property(d => d.Titulo).IsRequired();
 
-            Property(d => d.Contenido).HasMaxLength(1000);
+            Property(d => d.Contenido).HasMaxLength(4096);
             Property(d => d.Contenido).IsRequired();
 
             Property(d => d.FueLeido).IsRequired();

@@ -14,9 +14,9 @@ namespace Bow.Administracion.Mappings
         public EntidadMap()
         {
             //Atributos
-            Property(d => d.Nombre).HasMaxLength(200);
+            Property(d => d.Nombre).HasMaxLength(512);
             Property(d => d.Nombre).IsRequired();
-            Property(d => d.Descripcion).HasMaxLength(1000);
+            Property(d => d.Descripcion).HasMaxLength(4096);
             Property(d => d.Descripcion).IsRequired();
 
             //Tabla
