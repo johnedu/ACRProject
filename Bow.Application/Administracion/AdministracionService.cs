@@ -1,4 +1,5 @@
 ﻿using Abp.Localization;
+using Abp.Runtime.Session;
 using Abp.UI;
 using AutoMapper;
 using Bow.Administracion.DTOs.InputModels;
@@ -29,6 +30,8 @@ namespace Bow.Administracion
         private IDimensionRepositorio _dimensionRepositorio;
         private IEntidadRepositorio _entidadRepositorio;
 
+        public IAbpSession AbpSession { get; set; }
+
         #endregion
 
         //Inyección de Dependencia en el Servicio
@@ -54,6 +57,7 @@ namespace Bow.Administracion
             _juegoRepositorio = juegoRepositorio;
             _dimensionRepositorio = dimensionRepositorio;
             _entidadRepositorio = entidadRepositorio;
+            AbpSession = NullAbpSession.Instance;
         }
 
         /*********************************************************************************************
@@ -83,8 +87,10 @@ namespace Bow.Administracion
 
             if (existeFAQ == null)
             {
-                nuevaFaq.Fecha = DateTime.Now.ToString();
-                _preguntaFrecuenteRepositorio.Insert(Mapper.Map<PreguntaFrecuente>(nuevaFaq));
+                PreguntaFrecuente preguntaFrecuente = Mapper.Map<PreguntaFrecuente>(nuevaFaq);
+                preguntaFrecuente.FechaCreacion = DateTime.Now.ToString();
+                preguntaFrecuente.TenantId = 1;
+                _preguntaFrecuenteRepositorio.Insert(preguntaFrecuente);
             }
             else
             {
@@ -96,7 +102,6 @@ namespace Bow.Administracion
 
         public void DeletePreguntaFrecuente(DeletePreguntaFrecuenteInput faqEliminar)
         {
-
             _preguntaFrecuenteRepositorio.Delete(faqEliminar.Id);
         }
 
@@ -106,8 +111,10 @@ namespace Bow.Administracion
 
             if (existeFAQ == null)
             {
-                faqUpdate.Fecha = DateTime.Now.ToString();
-                _preguntaFrecuenteRepositorio.Update(Mapper.Map<PreguntaFrecuente>(faqUpdate));
+                PreguntaFrecuente preguntaFrecuente = _preguntaFrecuenteRepositorio.Get(faqUpdate.Id);
+                Mapper.Map(faqUpdate, preguntaFrecuente);
+                preguntaFrecuente.FechaModificacion = DateTime.Now.ToString();
+                _preguntaFrecuenteRepositorio.Update(preguntaFrecuente);
             }
             else
             {
@@ -122,9 +129,11 @@ namespace Bow.Administracion
 
         public void EnviarMensaje(EnviarMensajeInput mensaje)
         {
-            mensaje.UsuarioEmisorId = _usuarioRepositorio.GetAll().Where(u => u.Coda == mensaje.CodaEmisor).FirstOrDefault().Id;
-            mensaje.UsuarioReceptorId = _usuarioRepositorio.GetAll().Where(u => u.Coda == mensaje.CodaReceptor).FirstOrDefault().Id;
-            _mensajeRepositorio.Insert(Mapper.Map<Mensaje>(mensaje));
+            Mensaje mensajeEditado = Mapper.Map<Mensaje>(mensaje);
+            mensajeEditado.UsuarioEmisorId = _usuarioRepositorio.GetAll().Where(u => u.Coda == mensaje.CodaEmisor).FirstOrDefault().Id;
+            mensajeEditado.UsuarioReceptorId = _usuarioRepositorio.GetAll().Where(u => u.Coda == mensaje.CodaReceptor).FirstOrDefault().Id;
+            mensajeEditado.TenantId = 1;
+            _mensajeRepositorio.Insert(mensajeEditado);
         }
 
         public GetMensajeOutput GetMensaje(GetMensajeInput mensaje)
@@ -150,7 +159,6 @@ namespace Bow.Administracion
 
         public void DeleteMensaje(DeleteMensajeInput mensajeEliminar)
         {
-
             _mensajeRepositorio.Delete(mensajeEliminar.Id);
         }
 
@@ -186,7 +194,9 @@ namespace Bow.Administracion
                 {
                     usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PROFESIONAL).FirstOrDefault().Id;
                 }
-                _usuarioRepositorio.Insert(Mapper.Map<Usuario>(usuario));
+                Usuario usuarioEditado = Mapper.Map<Usuario>(usuario);
+                usuarioEditado.TenantId = 1;
+                _usuarioRepositorio.Insert(usuarioEditado);
             }
         }
 
@@ -218,8 +228,10 @@ namespace Bow.Administracion
 
             if (existePregunta == null)
             {
-                nuevaPregunta.Fecha = DateTime.Now.ToString();
-                _preguntaRepositorio.Insert(Mapper.Map<Pregunta>(nuevaPregunta));
+                Pregunta pregunta = Mapper.Map<Pregunta>(nuevaPregunta);
+                pregunta.FechaCreacion = DateTime.Now.ToString();
+                pregunta.TenantId = 1;
+                _preguntaRepositorio.Insert(pregunta);
             }
             else
             {
@@ -230,8 +242,24 @@ namespace Bow.Administracion
 
         public void DeletePregunta(DeletePreguntaInput preguntaEliminar)
         {
-
+            _respuestaRepositorio.Delete(r => r.PreguntaId == preguntaEliminar.Id);
             _preguntaRepositorio.Delete(preguntaEliminar.Id);
+        }
+
+        public PuedeEliminarPreguntaOutput PuedeEliminarPreguntaOutput(PuedeEliminarPreguntaOutputInput preguntaEliminar)
+        {
+            var listaPuntajes = _puntajeRepositorio.GetAll().Where(op => op.PreguntaId == preguntaEliminar.Id);
+            PuedeEliminarPreguntaOutput puede = new PuedeEliminarPreguntaOutput();
+
+            if (listaPuntajes.Count() == 0)
+            {
+                puede.PuedeEliminar = true;
+            }
+            else
+            {
+                puede.PuedeEliminar = false;
+            }
+            return puede;
         }
 
         public void UpdatePregunta(UpdatePreguntaInput preguntaUpdate)
@@ -240,8 +268,10 @@ namespace Bow.Administracion
 
             if (existePregunta == null)
             {
-                preguntaUpdate.Fecha = DateTime.Now.ToString();
-                _preguntaRepositorio.Update(Mapper.Map<Pregunta>(preguntaUpdate));
+                Pregunta pregunta = _preguntaRepositorio.Get(preguntaUpdate.Id);
+                Mapper.Map(preguntaUpdate, pregunta);
+                pregunta.FechaModificacion = DateTime.Now.ToString();
+                _preguntaRepositorio.Update(Mapper.Map<Pregunta>(pregunta));
             }
             else
             {
@@ -289,7 +319,9 @@ namespace Bow.Administracion
                         _respuestaRepositorio.Update(respuestaCorrectaActual);
                     }
                 }
-                _respuestaRepositorio.Insert(Mapper.Map<Respuesta>(nuevaRespuesta));
+                Respuesta respuesta = Mapper.Map<Respuesta>(nuevaRespuesta);
+                respuesta.TenantId = 1;
+                _respuestaRepositorio.Insert(respuesta);
             }
             else
             {
@@ -328,7 +360,9 @@ namespace Bow.Administracion
                         respuestaUpdate.Comodin50_50 = false;
                     }
                 }
-                _respuestaRepositorio.Update(Mapper.Map<Respuesta>(respuestaUpdate));
+                Respuesta respuesta = _respuestaRepositorio.Get(respuestaUpdate.Id);
+                Mapper.Map(respuestaUpdate, respuesta);
+                _respuestaRepositorio.Update(respuesta);
             }
             else
             {
@@ -358,7 +392,9 @@ namespace Bow.Administracion
         public void SavePuntaje(SavePuntajeInput puntaje)
         {
             puntaje.UsuarioId = _usuarioRepositorio.GetAll().Where(u => u.Coda == puntaje.Usuario).FirstOrDefault().Id;
-            var p = _puntajeRepositorio.Insert(Mapper.Map<Puntaje>(puntaje));
+            Puntaje puntajeEditado = Mapper.Map<Puntaje>(puntaje);
+            puntajeEditado.TenantId = 1;
+            var p = _puntajeRepositorio.Insert(puntajeEditado);
         }
 
         public GetAllJuegosOutput GetAllJuegos()
@@ -394,8 +430,10 @@ namespace Bow.Administracion
 
             if (existeEntidad == null)
             {
-                nuevaEntidad.Fecha = DateTime.Now.ToString();
-                _entidadRepositorio.Insert(Mapper.Map<Entidad>(nuevaEntidad));
+                Entidad entidad = Mapper.Map<Entidad>(nuevaEntidad);
+                entidad.FechaCreacion = DateTime.Now.ToString();
+                entidad.TenantId = 1;
+                _entidadRepositorio.Insert(entidad);
             }
             else
             {
@@ -416,8 +454,10 @@ namespace Bow.Administracion
 
             if (existeEntidad == null)
             {
-                entidadUpdate.Fecha = DateTime.Now.ToString();
-                _entidadRepositorio.Update(Mapper.Map<Entidad>(entidadUpdate));
+                Entidad entidad = _entidadRepositorio.Get(entidadUpdate.Id);
+                Mapper.Map(entidadUpdate, entidad);
+                entidad.FechaModificacion = DateTime.Now.ToString();
+                _entidadRepositorio.Update(entidad);
             }
             else
             {

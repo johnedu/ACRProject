@@ -4,17 +4,17 @@
     var app = angular.module('app', [
         'ngAnimate',
         'ngSanitize',
-
         'ui.router',
         'ui.bootstrap',
         'ui.jq',
-
-        'abp'
+        'naut',
+        'abp',
+        'ngFileUpload'
     ]);
 
     //Configuración de parámetros de paginación por defecto
     app.run(function (paginationConfig) {
-        paginationConfig.maxSize = 3;
+        paginationConfig.maxSize = 5;
         paginationConfig.rotate = false;
         paginationConfig.boundaryLinks = true;
         paginationConfig.firstText = "<<";
@@ -33,10 +33,11 @@
     });
 
     //Configuration for Angular UI routing.
-    app.config([
-        '$stateProvider', '$urlRouterProvider',
-        function ($stateProvider, $urlRouterProvider) {
+    app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+
+        //ruta por defecto
             $urlRouterProvider.otherwise('/');
+
             $stateProvider
                 .state('home', {
                     url: '/',

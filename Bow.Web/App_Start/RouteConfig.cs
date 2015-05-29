@@ -17,11 +17,25 @@ namespace Bow.Web
                 defaults: new { id = RouteParameter.Optional }
                 );
 
+            routes.MapHttpRoute(
+                name: "ActionApi",
+                routeTemplate: "api/{controller}/action/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                );
+
+            routes.MapRoute(
+                name: "Login",
+                url: "{tenantName}/Login",
+                defaults: new { controller = "Account", action = "Login", tenantName = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            
         }
     }
 }

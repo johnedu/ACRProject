@@ -5,17 +5,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="ACR. Sistema de Administración de la App">
     <meta name="author" content="ACR">
-
     <title>ACR App - Sistema de Administración de la APP</title>
-
     <link rel="shortcut icon" href="~/favicon.ico?ver=1">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&subset=latin,latin-ext' rel='stylesheet'>
 
-    @Styles.Render("~/Bundles/App/vendor/css")
-    @Styles.Render("~/Bundles/App/Main/css")
+    @Styles.Render("~/bundles/BootstrapStyles")
+    @Styles.Render("~/bundles/ApplicationStyles")
+    @Styles.Render("~/bundles/ABPStyles")
+    @*@Styles.Render("~/Bundles/App/Main/css")*@
+
+
+    @*@Styles.Render("~/Bundles/App/vendor/css")
+    @Styles.Render("~/Bundles/App/Main/css")*@
 
     <script type="text/javascript">
         //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
@@ -27,8 +30,10 @@
         <script src="@Url.Content("~/Scripts/others/html5shiv.js")"></script>
         <script src="@Url.Content("~/Scripts/others/respond.min.js")"></script>
     <![endif]-->
-    @Scripts.Render("~/Bundles/App/vendor/js")
-
+    @*@Scripts.Render("~/Bundles/App/vendor/js")*@
+    @Scripts.Render("~/bundles/VendorScripts")
+    @Scripts.Render("~/bundles/AbpVendorScripts")
+    @Scripts.Render("~/bundles/AbpScripts")
     <script>
         //Localizing momentjs
         moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
@@ -38,25 +43,25 @@
     <script src="~/api/AbpServiceProxies/GetAll?type=angular"></script>
     <script src="~/AbpScripts/GetScripts" type="text/javascript"></script>
     <script src="~/AbpLocalization/GetScripts" type="text/javascript"></script>
-
-    
-
-    @Scripts.Render("~/Bundles/App/Main/js")
-    <!--Prueba de Google Maps-->
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
 </head>
-<body>
-    <div ng-app="app">
-        <div ng-controller="app.views.layout as vm">
-            <div ng-include="'/App/Main/views/layout/header.cshtml'"></div>
-            <div class="container-fluid">
-                <div class="row">
-                    <div ui-view class="col-xs-12"></div>
-                    {{vm.inicializarTooltips()}}
-                </div>
-            </div>
-            <div ng-include="'/App/Main/views/layout/footer.cshtml'"></div>
-        </div>
+<body ng-app="app" ng-cloak="" ng-class="{ 'layout-fixed' : app.layout.isFixed, 'layout-boxed' : app.layout.isBoxed, 'layout-dock' : app.layout.isDocked, 'layout-material': app.layout.isMaterial, 'aside-offscreen' : app.sidebar.isOffscreen, 'footer-hidden': app.footer.hidden, 'in-app': !$state.includes('page')}">
+
+    <div class="app-container" ng-controller="CoreController">
+        <!-- top navbar-->
+        <header ng-include="'/App/Main/views/layout/header.cshtml'" ng-controller="HeaderNavController" ng-class="app.theme.topbar"></header>
+        <!-- Sidebar-->
+        <aside ng-include="'/App/Main/views/layout/sidebar.cshtml'" ng-class="app.theme.sidebar"></aside>
+        <!-- Main-->
+        <section>
+            <!-- Content-->
+            <div ui-view autoscroll="false" @*ng-class="app.views.animation"*@ class="app"></div>
+        </section>
+        <!-- Page footer-->
+        <footer ng-include="'/App/Main/views/layout/footer.cshtml'"></footer>
     </div>
+
+    @Scripts.Render("~/bundles/ApplicationScripts")
+    @Scripts.Render("~/Bundles/App/Main/js")
+
 </body>
 </html>

@@ -1,9 +1,14 @@
 ﻿using Abp.EntityFramework;
+using Abp.Zero.EntityFramework;
 using Bow.Administracion.Mappings;
+using Bow.Seguridad;
+using Bow.Seguridad.Autorizacion;
+using Bow.Seguridad.MultiTenancy;
+using Bow.Seguridad.Usuarios;
 
 namespace Bow.EntityFramework
 {
-    public class BowDbContext : AbpDbContext
+    public class BowDbContext : AbpZeroDbContext<Tenant, Role, User>
     {
         //TODO: Define an IDbSet for each Entity...
 
@@ -34,7 +39,7 @@ namespace Bow.EntityFramework
         protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
         {
 
-            modelBuilder.HasDefaultSchema("bow");
+            modelBuilder.HasDefaultSchema("AcrProject");
             modelBuilder.Configurations.Add(new PreguntaFrecuenteMap());
             modelBuilder.Configurations.Add(new JuegoMap());
             modelBuilder.Configurations.Add(new DimensionMap());
