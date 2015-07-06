@@ -104,7 +104,7 @@ namespace Bow.Administracion
             return new GetAllCasesOutput { Cases = Mapper.Map<List<CasesOutput>>(CasesList) };
         }
 
-        public void Cases(SaveCaseInput nuevoCase)
+        public void SaveCases(SaveCaseInput nuevoCase)
         {
             Cases existeCase = _casesRepositorio.FirstOrDefault(p => p.title.ToLower() == nuevoCase.title.ToLower());
 
@@ -128,7 +128,7 @@ namespace Bow.Administracion
             return new GetAllLocationsOutput { Points = Mapper.Map<List<LocationsOutput>>(LocationsList) };
         }
 
-        public void Points(SaveLocationInput nuevaLocation)
+        public void SavePoints(SaveLocationInput nuevaLocation)
         {
             Locations existeLocation = _locationsRepositorio.FirstOrDefault(p => p.description.ToLower() == nuevaLocation.description.ToLower());
 
@@ -169,7 +169,7 @@ namespace Bow.Administracion
             return new GetAllSliderOutput { Slider = Mapper.Map<List<SliderOutput>>(SliderList) };
         }
 
-        public void Driver(SaveDriverInput nuevoDriver)
+        public void SaveDriver(SaveDriverInput nuevoDriver)
         {
             _driverRepositorio.Insert(Mapper.Map<Driver>(nuevoDriver));
         }

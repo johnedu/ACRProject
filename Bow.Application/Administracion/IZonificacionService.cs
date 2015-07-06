@@ -26,11 +26,11 @@ namespace Bow.Administracion
 
         GetAllCasesOutput Cases();
 
-        void Cases(SaveCaseInput nuevoCase);
+        void SaveCases(SaveCaseInput nuevoCase);
 
         GetAllLocationsOutput Points();
 
-        void Points(SaveLocationInput nuevaLocation);
+        void SavePoints(SaveLocationInput nuevaLocation);
 
         GetAllNewsOutput News();
 
@@ -40,7 +40,7 @@ namespace Bow.Administracion
 
         GetAllSliderOutput Slider();
 
-        void Driver(SaveDriverInput nuevoDriver);
+        void SaveDriver(SaveDriverInput nuevoDriver);
 
     }
 }
