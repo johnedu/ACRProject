@@ -11,7 +11,7 @@ namespace Bow.Administracion.DTOs.InputModels
     public class SaveRespuestaInput : IInputDto
     {
         [Required]
-        [MaxLength(4096)]
+        [MaxLength(200)]
         public string Texto { get; set; }
         [Required]
         public bool Comodin50_50 { get; set; }

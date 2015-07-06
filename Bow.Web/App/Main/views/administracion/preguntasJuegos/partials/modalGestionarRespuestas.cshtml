@@ -75,7 +75,7 @@
                 <form role="form" name="formNuevaRespuesta">
                     <div class="form-group" ng-class="{'has-error' : formNuevaRespuesta.iptTexto.$dirty && formNuevaRespuesta.iptTexto.$invalid }">
                         <label class="control-label" for="iptTexto">@L("")Texto</label>
-                        <textarea class="form-control" id="iptTexto" name="iptTexto" placeholder="@L("")Texto de la respuesta" ng-model="respuesta.texto" required maxlength="4096" rows="5"></textarea>
+                        <input type="text" class="form-control" id="iptTexto" name="iptTexto" placeholder="@L("")Texto de la respuesta" ng-model="respuesta.texto" required maxlength="300" />
                         <div ng-show="formNuevaRespuesta.iptTexto.$dirty && formNuevaRespuesta.iptTexto.$invalid">
                             <small ng-show="formNuevaRespuesta.iptTexto.$error.required" class="text-danger">
                                 @L("")El texto es requerido

@@ -11,10 +11,10 @@ namespace Bow.Administracion.DTOs.InputModels
     public class SavePreguntaFrecuenteInput : IInputDto
     {
         [Required]
-        [MaxLength(4096)]
+        [MaxLength(200)]
         public string Pregunta { get; set; }
         [Required]
-        [MaxLength(4096)]
+        [MaxLength(300)]
         public string Respuesta { get; set; }
         public bool EstadoActiva { get; set; }
         public int Usuario { get; set; }

@@ -16,7 +16,7 @@ namespace Bow.Administracion.Mappings
             //Atributos
             Property(d => d.PuntajeValor).IsRequired();
 
-            Property(d => d.Respuesta).HasMaxLength(4096);
+            Property(d => d.Respuesta).HasMaxLength(300);
             Property(d => d.Respuesta).IsRequired();
 
             //Llaves Foráneas

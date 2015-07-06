@@ -14,7 +14,7 @@ namespace Bow.Administracion.Mappings
         public TipoMap()
         {
             //Atributos
-            Property(d => d.Nombre).HasMaxLength(512);
+            Property(d => d.Nombre).HasMaxLength(100);
             Property(d => d.Nombre).IsRequired();
 
             //Llaves Foráneas

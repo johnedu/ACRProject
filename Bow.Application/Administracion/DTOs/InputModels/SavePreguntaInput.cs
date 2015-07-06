@@ -11,13 +11,13 @@ namespace Bow.Administracion.DTOs.InputModels
     public class SavePreguntaInput : IInputDto
     {
         [Required]
-        [MaxLength(4096)]
+        [MaxLength(300)]
         public string Texto { get; set; }
         [Required]
         [MaxLength(1)]
         public string Nivel { get; set; }
         [Required]
-        [MaxLength(4096)]
+        [MaxLength(300)]
         public string Pista { get; set; }
         public int JuegoId { get; set; }
         public int DimensionId { get; set; }

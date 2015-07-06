@@ -144,10 +144,6 @@
     <Compile Include="Migrations\201505020406188_tabla_entidad.Designer.cs">
       <DependentUpon>201505020406188_tabla_entidad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201505251137070_tabla_entidad_maxLength.cs" />
-    <Compile Include="Migrations\201505251137070_tabla_entidad_maxLength.Designer.cs">
-      <DependentUpon>201505251137070_tabla_entidad_maxLength.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BowDataModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,9 +174,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201505020406188_tabla_entidad.resx">
       <DependentUpon>201505020406188_tabla_entidad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505251137070_tabla_entidad_maxLength.resx">
-      <DependentUpon>201505251137070_tabla_entidad_maxLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ namespace Bow.Administracion.Mappings
         public RespuestaMap()
         {
             //Atributos
-            Property(d => d.Texto).HasMaxLength(4096);
+            Property(d => d.Texto).HasMaxLength(200);
             Property(d => d.Texto).IsRequired();
 
             Property(d => d.Comodin50_50).IsRequired();

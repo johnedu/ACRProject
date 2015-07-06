@@ -8,7 +8,7 @@
     <form role="form" name="modalEditarPregunta">
         <div class="form-group" ng-class="{'has-error' : modalEditarPregunta.iptTexto.$dirty && modalEditarPregunta.iptTexto.$invalid}">
             <label class="control-label" for="iptTexto">@L("")Texto</label>
-            <textarea class="form-control" id="iptTexto" name="iptTexto" placeholder="@L("")Ingrese la pregunta" ng-model="pregunta.texto" required maxlength="4096" rows="5"></textarea>
+            <input type="text" class="form-control" id="iptTexto" name="iptTexto" placeholder="@L("")Ingrese la pregunta" ng-model="pregunta.texto" required maxlength="200" />
             <div ng-show="modalEditarPregunta.iptTexto.$dirty && modalEditarPregunta.iptTexto.$invalid">
                 <small ng-show="modalEditarPregunta.iptTexto.$error.required" class="text-danger">
                     @L("")El texto de la pregunta es requerido
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group" ng-class="{'has-error' : modalEditarPregunta.iptPista.$dirty && modalEditarPregunta.iptPista.$invalid}">
             <label class="control-label" for="iptPista">@L("")Pista</label>
-            <textarea class="form-control" id="iptPista" name="iptPista" placeholder="@L("")Ingrese la pista" ng-model="pregunta.pista" required maxlength="4096" rows="5"></textarea>
+            <input type="text" class="form-control" id="iptPista" name="iptPista" placeholder="@L("")Ingrese la respuesta" ng-model="pregunta.pista" required maxlength="300" />
             <div ng-show="modalEditarPregunta.iptPista.$dirty && modalEditarPregunta.iptPista.$invalid">
                 <small ng-show="modalEditarPregunta.iptPista.$error.required" class="text-danger">
                     @L("")La pista de la pregunta es requerida
