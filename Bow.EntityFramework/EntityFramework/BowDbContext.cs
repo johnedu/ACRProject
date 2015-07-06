@@ -36,14 +36,6 @@ namespace Bow.EntityFramework
 
             modelBuilder.HasDefaultSchema("bow");
             modelBuilder.Configurations.Add(new PreguntaFrecuenteMap());
-            modelBuilder.Configurations.Add(new JuegoMap());
-            modelBuilder.Configurations.Add(new DimensionMap());
-            modelBuilder.Configurations.Add(new TipoMap());
-            modelBuilder.Configurations.Add(new UsuarioMap());
-            modelBuilder.Configurations.Add(new PreguntaMap());
-            modelBuilder.Configurations.Add(new MensajeMap());
-            modelBuilder.Configurations.Add(new PuntajeMap());
-            modelBuilder.Configurations.Add(new RespuestaMap());
 
             base.OnModelCreating(modelBuilder);
         }

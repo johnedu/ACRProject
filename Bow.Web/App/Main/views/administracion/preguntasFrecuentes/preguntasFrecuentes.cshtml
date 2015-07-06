@@ -19,8 +19,6 @@
                     <tr>
                         <th>@L("")Pregunta</th>
                         <th>@L("")Respuesta</th>
-                        <th class="text-center">@L("")Estado</th>
-                        <th class="text-center">@L("")Cambiar Estado</th>
                         <th class="text-center">@L("")Editar</th>
                         <th class="text-center">@L("")Eliminar</th>
                     </tr>
@@ -32,17 +30,6 @@
                         </td>
                         <td>
                             {{pregunta.respuesta}}
-                        </td>
-                        <td>
-                            <span ng-show="pregunta.estadoActiva">
-                                Activa
-                            </span>
-                            <span ng-show="!pregunta.estadoActiva">
-                                Inactiva
-                            </span>
-                        </td>
-                        <td class="text-center">
-                            <a ng-click="vm.modificarEstadoPregunta(pregunta)" title="@L("")Cambiar el estado de la pregunta frecuente"><span class="glyphicon glyphicon-refresh font-size-16"></span></a>
                         </td>
                         <td class="text-center">
                             <a ng-click="vm.abrirModalEditar(pregunta.id)" title="@L("")Editar pregunta frecuente"><span class="glyphicon glyphicon-pencil font-size-16"></span></a>

@@ -8,17 +8,23 @@
     * 
     *****************************************************************/
 
-    angular.module('app').controller(controllerId, ['$scope', '$modal', 'abp.services.app.administracion',
-       function ($scope, $modal, administracionService) {
+    angular.module('app').controller(controllerId, ['$scope', '$modal', 'abp.services.app.zonificacion',
+       function ($scope, $modal, zonificacionService) {
            var vm = this;
 
            //Inicializando Modelos
 
            vm.preguntasFrecuentes = [];
 
+           vm.preguntaFrecuente = {
+               id: '',
+               pregunta: '',
+               respuesta: ''
+           };
+
            //Funcion encargada de consultar las preguntas frecuentes en la base de datos
            function cargarPreguntasFrecuentes() {
-               administracionService.getAllPreguntasFrecuentes().success(function (data) {
+               zonificacionService.getAllPreguntasFrecuentes().success(function (data) {
                    vm.preguntasFrecuentes = data.preguntasFrecuentes;
                });
            }
@@ -82,31 +88,12 @@
                     }
                 });
 
-                modalInstance.result.then(function (pregunta) {
+                modalInstance.result.then(function (dptoNombre) {
                     cargarPreguntasFrecuentes();
-                    abp.notify.success(abp.localization.localize('', 'Bow') + 'Se eliminó correctamente la pregunta: ' + pregunta, abp.localization.localize('', 'Bow') + 'Información');
+                    abp.notify.success(abp.localization.localize('', 'Bow') + 'Se eliminó correctamente la pregunta: ' + dptoNombre, abp.localization.localize('', 'Bow') + 'Información');
                 }, function () {
                     vm.resultado = abp.localization.localize('', 'Bow') + 'Ocurrió un problema al actualizar la pregunta frecuente'
                 });
-           }
-
-           /************************************************************************
-           * Llamado para modificar el estado de la pregunta frecuente
-           ************************************************************************/
-           vm.modificarEstadoPregunta = function (pregunta) {
-               if (pregunta.estadoActiva) {
-                   pregunta.estadoActiva = false;
-               }
-               else {
-                   pregunta.estadoActiva = true;
-               }
-               administracionService.updatePreguntaFrecuente(pregunta)
-                   .success(function () {
-                       abp.notify.success(abp.localization.localize('', 'Bow') + 'Se modificó correctamente el estado de la pregunta: ' + pregunta.pregunta, abp.localization.localize('', 'Bow') + 'Información');
-                       cargarPreguntasFrecuentes();
-                   }).error(function (error) {
-                       $scope.mensajeError = error.message;
-                   });
            }
        }]);
 })();

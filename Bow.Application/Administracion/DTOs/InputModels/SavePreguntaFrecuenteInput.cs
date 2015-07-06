@@ -16,6 +16,5 @@ namespace Bow.Administracion.DTOs.InputModels
         [Required]
         [MaxLength(300)]
         public string Respuesta { get; set; }
-        public bool EstadoActiva { get; set; }
     }
 }

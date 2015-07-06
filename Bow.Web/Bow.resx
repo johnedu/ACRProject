@@ -123,7 +123,16 @@
   <data name="menu_administracion_preguntasFrecuentes" xml:space="preserve">
     <value>Preguntas Frecuentes</value>
   </data>
-  <data name="menu_administracion_preguntasJuegos" xml:space="preserve">
-    <value>Juegos de la App</value>
+  <data name="menu_juegos" xml:space="preserve">
+    <value>JUEGOS DE LA APP</value>
+  </data>
+  <data name="menu_juegos_falso_verdadero" xml:space="preserve">
+    <value>Falso o Verdadero</value>
+  </data>
+  <data name="menu_juegos_millonario" xml:space="preserve">
+    <value>Millonario</value>
+  </data>
+  <data name="menu_juegos_pasapalabras" xml:space="preserve">
+    <value>Pasa-palabras</value>
   </data>
 </root>

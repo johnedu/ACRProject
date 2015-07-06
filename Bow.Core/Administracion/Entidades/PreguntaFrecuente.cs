@@ -12,6 +12,5 @@ namespace Bow.Administracion.Entidades
     {
         public string Pregunta { get; set; }
         public string Respuesta { get; set; }
-        public bool EstadoActiva { get; set; }
     }
 }

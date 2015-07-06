@@ -1,6 +1,6 @@
 ﻿(function () {
-    angular.module('app').controller('modalNuevoPreguntasFrecuentesController', ['$scope', '$modalInstance', 'abp.services.app.administracion',
-        function ($scope, $modalInstance, administracionService) {
+    angular.module('app').controller('modalNuevoPreguntasFrecuentesController', ['$scope', '$modalInstance', 'abp.services.app.zonificacion',
+        function ($scope, $modalInstance, zonificacionService) {
 
             $scope.preguntaFrecuente = {
                 pregunta: '',
@@ -9,7 +9,7 @@
 
             $scope.okModal = function () {
 
-                administracionService.savePreguntaFrecuente($scope.preguntaFrecuente)
+                zonificacionService.savePreguntaFrecuente($scope.preguntaFrecuente)
                     .success(function () {
                         $modalInstance.close($scope.preguntaFrecuente.pregunta);
                     }).error(function (error) {
