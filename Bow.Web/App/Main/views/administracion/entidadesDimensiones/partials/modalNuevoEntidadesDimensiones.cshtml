@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="form-group" ng-class="{'has-error' : modalNuevaEntidad.iptDescripcion.$dirty && modalNuevaEntidad.iptDescripcion.$invalid}">
-            <label class="control-label" for="iptDescripcion">@L("")Descripción</label>
+            <label class="control-label" for="iptDescripcion">@L("")Pista</label>
             <input type="text" class="form-control" id="iptDescripcion" name="iptDescripcion" placeholder="@L("")Ingrese la descripción" ng-model="entidad.descripcion" required maxlength="1000" />
             <div ng-show="modalNuevaEntidad.iptDescripcion.$dirty && modalNuevaEntidad.iptDescripcion.$invalid">
                 <small ng-show="modalNuevaEntidad.iptDescripcion.$error.required" class="text-danger">

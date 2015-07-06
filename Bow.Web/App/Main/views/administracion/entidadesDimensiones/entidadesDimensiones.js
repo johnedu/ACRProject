@@ -25,10 +25,10 @@
                descripcion: ''
            };
 
-           //   Función encargada de consultar las entidades de una dimensión seleccionada
+           //   Función encargada de consultar las preguntas de una dimensión seleccionada
            vm.cargarEntidades = function () {
                administracionService.getAllEntidadesByDimension({ dimensionId: vm.selectedDimension }).success(function (data) {
-                   vm.listaEntidades = data.entidades;
+                   vm.listaPreguntas = data.preguntas;
                });
            }
 
@@ -92,14 +92,14 @@
                     controller: 'modalEliminarEntidadesDimensionesController',
                     size: 'md',
                     resolve: {
-                        entidadEliminar: function () {
-                            return entidadId;
+                        preguntaEliminar: function () {
+                            return preguntaId;
                         }
                     }
                 });
 
                 modalInstance.result.then(function () {
-                    vm.cargarEntidades();
+                    vm.cargarPreguntas();
                     abp.notify.success(abp.localization.localize('', 'Bow') + 'Se eliminó correctamente la pregunta', abp.localization.localize('', 'Bow') + 'Información');
                 }, function () {
                     vm.resultado = abp.localization.localize('', 'Bow') + 'Ocurrió un problema al actualizar la pregunta';
