@@ -21,7 +21,7 @@ namespace Bow.Administracion.Repositorios
 
         public List<Mensaje> GetAllMensajesByEmisor(string Emisor)
         {
-            return GetAll().Where(m => m.UsuarioEmisor.Coda == Emisor && m.TenantId == 1).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).ToList();
+            return GetAll().Where(m => m.UsuarioEmisor.Coda == Emisor).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).ToList();
         }
 
         public List<Mensaje> GetAllMensajesByReceptor(string Receptor)

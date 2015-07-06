@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bow.EntidadBase
 {
-    public abstract class EntidadMultiTenant : Entity, IMultiTenant, IMustHaveTenant
+    public abstract class EntidadMultiTenant : Entity, IMultiTenant
     {
         public int TenantId { get; set; }
     }

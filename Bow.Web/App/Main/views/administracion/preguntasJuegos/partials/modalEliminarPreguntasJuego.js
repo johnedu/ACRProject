@@ -12,9 +12,11 @@
                     .success(function () {
                         $modalInstance.close($scope.pregunta.texto);
                     }).error(function (error) {
+                       
                         $scope.mensajeError = error.message;
                     });
             }
+
 
             $scope.cancelModal = function () {
                 $modalInstance.dismiss('cancel');

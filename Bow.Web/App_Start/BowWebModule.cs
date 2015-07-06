@@ -7,7 +7,6 @@ using Abp.Localization;
 using Abp.Localization.Sources.Xml;
 using Abp.Modules;
 using Abp.Localization.Sources.Resource;
-using Abp.Zero.Configuration;
 
 namespace Bow.Web
 {
@@ -30,11 +29,6 @@ namespace Bow.Web
 
             //Configure navigation/menu
             Configuration.Navigation.Providers.Add<BowNavigationProvider>();
-
-            //Habilitando Multy-Tenancy
-            Configuration.MultiTenancy.IsEnabled = true;
-
-            
         }
 
         public override void Initialize()

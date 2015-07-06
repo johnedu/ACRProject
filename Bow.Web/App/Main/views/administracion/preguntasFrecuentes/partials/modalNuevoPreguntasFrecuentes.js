@@ -4,8 +4,7 @@
 
             $scope.preguntaFrecuente = {
                 pregunta: '',
-                respuesta: '',
-                estadoActiva: 'true'
+                respuesta: ''
             };
 
             $scope.okModal = function () {
