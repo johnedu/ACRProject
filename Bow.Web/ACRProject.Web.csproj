@@ -222,10 +222,6 @@
     <Content Include="App\Main\styles\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\partials\modalEditarEntidadesDimensiones.js" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\partials\modalEliminarEntidadesDimensiones.js" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\partials\modalNuevoEntidadesDimensiones.js" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\entidadesDimensiones.js" />
     <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalGestionarRespuestas.js" />
     <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEditarPreguntasJuego.js" />
     <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEliminarPreguntasJuego.js" />
@@ -394,10 +390,6 @@
     <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalEliminarPreguntasJuego.cshtml" />
     <Content Include="App\Main\views\administracion\preguntasJuegos\preguntasJuegos.cshtml" />
     <Content Include="App\Main\views\administracion\preguntasJuegos\partials\modalGestionarRespuestas.cshtml" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\partials\modalEditarEntidadesDimensiones.cshtml" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\partials\modalEliminarEntidadesDimensiones.cshtml" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\partials\modalNuevoEntidadesDimensiones.cshtml" />
-    <Content Include="App\Main\views\administracion\entidadesDimensiones\entidadesDimensiones.cshtml" />
     <None Include="Properties\PublishProfiles\Bow Local.pubxml" />
     <None Include="Properties\PublishProfiles\IIS Pruebas.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

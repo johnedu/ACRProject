@@ -19,9 +19,9 @@ namespace Bow.Administracion.Repositorios
 
         }
 
-        public List<Puntaje> GetAllHistorialPuntajesByUsuario(string Usuario)
+        public List<Puntaje> GetAllHistorialPuntajesByUsuario(int UsuarioId)
         {
-            return GetAll().Where(p => p.UsuarioPuntaje.Coda == Usuario).Include(p => p.PreguntaPuntaje.DimensionPregunta).Include(p => p.PreguntaPuntaje.JuegoPregunta).Take(10).OrderBy(p => p.Id).ToList();
+            return GetAll().Where(p => p.UsuarioId == UsuarioId).Include(p => p.PreguntaPuntaje.DimensionPregunta).Include(p => p.PreguntaPuntaje.JuegoPregunta).Take(10).OrderBy(p => p.Id).ToList();
 
         }
 

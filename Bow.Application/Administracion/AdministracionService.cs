@@ -27,7 +27,6 @@ namespace Bow.Administracion
         private ITipoRepositorio _tipoRepositorio;
         private IJuegoRepositorio _juegoRepositorio;
         private IDimensionRepositorio _dimensionRepositorio;
-        private IEntidadRepositorio _entidadRepositorio;
 
         #endregion
 
@@ -41,8 +40,7 @@ namespace Bow.Administracion
             IRespuestaRepositorio respuestaRepositorio,
             ITipoRepositorio tipoRepositorio,
             IJuegoRepositorio juegoRepositorio,
-            IDimensionRepositorio dimensionRepositorio,
-            IEntidadRepositorio entidadRepositorio)
+            IDimensionRepositorio dimensionRepositorio)
         {
             _preguntaFrecuenteRepositorio = preguntaFrecuenteRepositorio;
             _mensajeRepositorio = mensajeRepositorio;
@@ -53,7 +51,6 @@ namespace Bow.Administracion
             _tipoRepositorio = tipoRepositorio;
             _juegoRepositorio = juegoRepositorio;
             _dimensionRepositorio = dimensionRepositorio;
-            _entidadRepositorio = entidadRepositorio;
         }
 
         /*********************************************************************************************
@@ -83,13 +80,11 @@ namespace Bow.Administracion
 
             if (existeFAQ == null)
             {
-                nuevaFaq.Fecha = DateTime.Now.ToString();
                 _preguntaFrecuenteRepositorio.Insert(Mapper.Map<PreguntaFrecuente>(nuevaFaq));
             }
             else
             {
-                //var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
-                var mensajeError = "Ya existe la pregunta frecuente.";
+                var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
                 throw new UserFriendlyException(mensajeError);
             }
         }
@@ -106,12 +101,11 @@ namespace Bow.Administracion
 
             if (existeFAQ == null)
             {
-                faqUpdate.Fecha = DateTime.Now.ToString();
                 _preguntaFrecuenteRepositorio.Update(Mapper.Map<PreguntaFrecuente>(faqUpdate));
             }
             else
             {
-                var mensajeError = "Ya existe la pregunta frecuente.";
+                var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
                 throw new UserFriendlyException(mensajeError);
             }
         }
@@ -122,15 +116,13 @@ namespace Bow.Administracion
 
         public void EnviarMensaje(EnviarMensajeInput mensaje)
         {
-            mensaje.UsuarioEmisorId = _usuarioRepositorio.GetAll().Where(u => u.Coda == mensaje.CodaEmisor).FirstOrDefault().Id;
-            mensaje.UsuarioReceptorId = _usuarioRepositorio.GetAll().Where(u => u.Coda == mensaje.CodaReceptor).FirstOrDefault().Id;
             _mensajeRepositorio.Insert(Mapper.Map<Mensaje>(mensaje));
         }
 
         public GetMensajeOutput GetMensaje(GetMensajeInput mensaje)
         {
-            Mensaje mensajeRespuesta = _mensajeRepositorio.GetMensajeByIdWithReceptorAndEmisor(mensaje.Id);
-            if (mensajeRespuesta.UsuarioReceptor.Coda == mensaje.Receptor)
+            Mensaje mensajeRespuesta = _mensajeRepositorio.Get(mensaje.Id);
+            if (mensaje.ReceptorId == mensajeRespuesta.UsuarioReceptorId)
             {
                 mensajeRespuesta.FueLeido = true;
                 _mensajeRepositorio.Update(mensajeRespuesta);
@@ -140,12 +132,12 @@ namespace Bow.Administracion
 
         public GetAllMensajesByEmisorOutput GetAllMensajesByEmisor(GetAllMensajesByEmisorInput mensajeEmisor)
         {
-            return new GetAllMensajesByEmisorOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAllMensajesByEmisor(mensajeEmisor.Emisor)) };
+            return new GetAllMensajesByEmisorOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAllMensajesByEmisor(mensajeEmisor.EmisorId)) };
         }
 
         public GetAllMensajesByReceptorOutput GetAllMensajesByReceptor(GetAllMensajesByReceptorInput mensajeEmisor)
         {
-            return new GetAllMensajesByReceptorOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAllMensajesByReceptor(mensajeEmisor.Receptor)) };
+            return new GetAllMensajesByReceptorOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAllMensajesByReceptor(mensajeEmisor.ReceptorId)) };
         }
 
         public void DeleteMensaje(DeleteMensajeInput mensajeEliminar)
@@ -156,7 +148,7 @@ namespace Bow.Administracion
 
         public GetMensajesSinLeerByUsuarioOutput GetMensajesSinLeerByUsuario(GetMensajesSinLeerByUsuarioInput usuario)
         {
-            return new GetMensajesSinLeerByUsuarioOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAll().Where(m => m.UsuarioReceptor.Coda == usuario.Usuario && m.FueLeido == false).OrderBy(m => m.Id)) };
+            return new GetMensajesSinLeerByUsuarioOutput { Mensajes = Mapper.Map<List<MensajeOutput>>(_mensajeRepositorio.GetAll().Where(m => m.UsuarioReceptorId == usuario.Id && m.FueLeido == false).OrderBy(m => m.Id)) };
         }
 
         /*********************************************************************************************
@@ -170,29 +162,23 @@ namespace Bow.Administracion
 
         public GetPuntajeUsuarioOutput GetPuntajeUsuario(GetPuntajeUsuarioInput usuario)
         {
-            return new GetPuntajeUsuarioOutput { PuntajeTotal = _puntajeRepositorio.GetAll().Where(p => p.UsuarioPuntaje.Coda == usuario.Usuario).Sum(p => p.PuntajeValor) };
+            return new GetPuntajeUsuarioOutput { PuntajeTotal = _puntajeRepositorio.GetAll().Where(p => p.UsuarioId == usuario.Id).Sum(p => p.PuntajeValor) };
         }
 
         public void SaveUsuario(SaveUsuarioInput usuario)
         {
-            Usuario usuarioRegistrado = _usuarioRepositorio.GetAll().Where(u => u.Coda == usuario.Coda).FirstOrDefault();
-            if (usuarioRegistrado == null)
-            {
-                if (usuario.Tipo.ToLower().Equals("ppr"))
-                {
-                    usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PPR).FirstOrDefault().Id;
-                }
-                else
-                {
-                    usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PROFESIONAL).FirstOrDefault().Id;
-                }
-                _usuarioRepositorio.Insert(Mapper.Map<Usuario>(usuario));
+            if (usuario.Tipo.ToLower().Equals("ppr")) {
+                usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PPR).FirstOrDefault().Id;
             }
+            else {
+                usuario.TipoId = _tipoRepositorio.GetAll().Where(t => t.Nombre == BowConsts.TIPO_USUARIO_PROFESIONAL).FirstOrDefault().Id;
+            }
+            _usuarioRepositorio.Insert(Mapper.Map<Usuario>(usuario));
         }
 
         public GetHistorialPuntajesUsuarioOutput GetHistorialPuntajesUsuario(GetHistorialPuntajesUsuarioInput usuario)
         {
-            return new GetHistorialPuntajesUsuarioOutput { Puntajes = Mapper.Map<List<PuntajeUsuarioOutput>>(_puntajeRepositorio.GetAllHistorialPuntajesByUsuario(usuario.Usuario)) };
+            return new GetHistorialPuntajesUsuarioOutput { Puntajes = Mapper.Map<List<PuntajeUsuarioOutput>>(_puntajeRepositorio.GetAllHistorialPuntajesByUsuario(usuario.UsuarioId)) };
         }
 
         /*********************************************************************************************
@@ -206,7 +192,7 @@ namespace Bow.Administracion
 
         public GetAllPreguntasByDimensionOutput GetAllPreguntasByDimension(GetAllPreguntasByDimensionInput dimension)
         {
-            var listaPreguntas = _preguntaRepositorio.GetAllWithJuego(dimension.DimensionId, dimension.JuegoId);
+            var listaPreguntas = _preguntaRepositorio.GetAllList().Where(p => p.DimensionId == dimension.DimensionId && p.JuegoId == dimension.JuegoId).OrderBy(p => p.Texto);
             return new GetAllPreguntasByDimensionOutput { Preguntas = Mapper.Map<List<PreguntasByDimensionOutput>>(listaPreguntas) };
         }
 
@@ -216,7 +202,6 @@ namespace Bow.Administracion
 
             if (existePregunta == null)
             {
-                nuevaPregunta.Fecha = DateTime.Now.ToString();
                 _preguntaRepositorio.Insert(Mapper.Map<Pregunta>(nuevaPregunta));
             }
             else
@@ -238,7 +223,6 @@ namespace Bow.Administracion
 
             if (existePregunta == null)
             {
-                preguntaUpdate.Fecha = DateTime.Now.ToString();
                 _preguntaRepositorio.Update(Mapper.Map<Pregunta>(preguntaUpdate));
             }
             else
@@ -267,24 +251,15 @@ namespace Bow.Administracion
         public GetAllRespuestasByPreguntaOutput GetAllRespuestasByPregunta(GetAllRespuestasByPreguntaInput pregunta)
         {
             var listaRespuestas = _respuestaRepositorio.GetAllList().Where(p => p.PreguntaId == pregunta.PreguntaId).OrderBy(p => p.Texto);
-            return new GetAllRespuestasByPreguntaOutput { Respuestas = Mapper.Map<List<RespuestasByPreguntaOutput>>(listaRespuestas), Comodines5050 = listaRespuestas.Count(m => m.Comodin50_50 == true) };
+            return new GetAllRespuestasByPreguntaOutput { Respuestas = Mapper.Map<List<RespuestasByPreguntaOutput>>(listaRespuestas) };
         }
 
         public void SaveRespuesta(SaveRespuestaInput nuevaRespuesta)
         {
-            Respuesta existeRespuesta = _respuestaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == nuevaRespuesta.Texto.ToLower() && p.PreguntaId == nuevaRespuesta.PreguntaId);
+            Respuesta existeRespuesta = _respuestaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == nuevaRespuesta.Texto.ToLower());
 
             if (existeRespuesta == null)
             {
-                if (nuevaRespuesta.RespuestaVerdadera)
-                {
-                    Respuesta respuestaCorrectaActual = _respuestaRepositorio.FirstOrDefault(r => r.PreguntaId == nuevaRespuesta.PreguntaId && r.RespuestaVerdadera);
-                    if (respuestaCorrectaActual != null)
-                    {
-                        respuestaCorrectaActual.RespuestaVerdadera = false;
-                        _respuestaRepositorio.Update(respuestaCorrectaActual);
-                    }
-                }
                 _respuestaRepositorio.Insert(Mapper.Map<Respuesta>(nuevaRespuesta));
             }
             else
@@ -302,28 +277,10 @@ namespace Bow.Administracion
 
         public void UpdateRespuesta(UpdateRespuestaInput respuestaUpdate)
         {
-            Respuesta existeRespuesta = _respuestaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == respuestaUpdate.Texto.ToLower() && p.PreguntaId == respuestaUpdate.PreguntaId && p.Id != respuestaUpdate.Id);
+            Respuesta existeRespuesta = _respuestaRepositorio.FirstOrDefault(p => p.Texto.ToLower() == respuestaUpdate.Texto.ToLower() && p.Id != respuestaUpdate.Id);
 
             if (existeRespuesta == null)
             {
-                respuestaUpdate.Fecha = DateTime.Now.ToString();
-                if (respuestaUpdate.RespuestaVerdadera)
-                {
-                    Respuesta respuestaCorrectaActual = _respuestaRepositorio.FirstOrDefault(r => r.PreguntaId == respuestaUpdate.PreguntaId && r.RespuestaVerdadera && r.Id != respuestaUpdate.Id);
-                    if (respuestaCorrectaActual != null)
-                    {
-                        respuestaCorrectaActual.RespuestaVerdadera = false;
-                        _respuestaRepositorio.Update(respuestaCorrectaActual);
-                    }
-                }
-                if (respuestaUpdate.Comodin50_50)
-                {
-                    int conteo = _respuestaRepositorio.GetAll().Where(r => r.PreguntaId == respuestaUpdate.PreguntaId && r.Comodin50_50 && r.Id != respuestaUpdate.Id).Count();
-                    if (conteo == 2)
-                    {
-                        respuestaUpdate.Comodin50_50 = false;
-                    }
-                }
                 _respuestaRepositorio.Update(Mapper.Map<Respuesta>(respuestaUpdate));
             }
             else
@@ -353,7 +310,6 @@ namespace Bow.Administracion
 
         public void SavePuntaje(SavePuntajeInput puntaje)
         {
-            puntaje.UsuarioId = _usuarioRepositorio.GetAll().Where(u => u.Coda == puntaje.Usuario).FirstOrDefault().Id;
             var p = _puntajeRepositorio.Insert(Mapper.Map<Puntaje>(puntaje));
         }
 
@@ -367,59 +323,6 @@ namespace Bow.Administracion
         {
             var listaDimensiones = _dimensionRepositorio.GetAllList().OrderBy(p => p.Nombre);
             return new GetAllDimensionesOutput { Dimensiones = Mapper.Map<List<DimensionOutput>>(listaDimensiones) };
-        }
-
-        /*********************************************************************************************
-         ****************************************  Entidades  ****************************************
-         *********************************************************************************************/
-
-        public GetEntidadOutput GetEntidad(GetEntidadInput entidadInput)
-        {
-            return Mapper.Map<GetEntidadOutput>(_entidadRepositorio.Get(entidadInput.Id));
-        }
-
-        public GetAllEntidadesByDimensionOutput GetAllEntidadesByDimension(GetAllEntidadesByDimensionInput dimension)
-        {
-            var listaEntidades = _entidadRepositorio.GetAll().Where(e => e.DimensionId == dimension.DimensionId);
-            return new GetAllEntidadesByDimensionOutput { Entidades = Mapper.Map<List<EntidadByDimensionOutput>>(listaEntidades) };
-        }
-
-        public void SaveEntidad(SaveEntidadInput nuevaEntidad)
-        {
-            Entidad existeEntidad = _entidadRepositorio.FirstOrDefault(p => p.Nombre.ToLower() == nuevaEntidad.Nombre.ToLower());
-
-            if (existeEntidad == null)
-            {
-                nuevaEntidad.Fecha = DateTime.Now.ToString();
-                _preguntaRepositorio.Insert(Mapper.Map<Pregunta>(nuevaEntidad));
-            }
-            else
-            {
-                var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
-                throw new UserFriendlyException(mensajeError);
-            }
-        }
-
-        public void DeleteEntidad(DeleteEntidadInput entidadEliminar)
-        {
-
-            _entidadRepositorio.Delete(entidadEliminar.Id);
-        }
-
-        public void UpdateEntidad(SaveEntidadInput entidadUpdate)
-        {
-            Entidad existeEntidad = _entidadRepositorio.FirstOrDefault(p => p.Nombre.ToLower() == entidadUpdate.Nombre.ToLower() && p.Id != entidadUpdate.Id);
-
-            if (existeEntidad == null)
-            {
-                entidadUpdate.Fecha = DateTime.Now.ToString();
-                _preguntaRepositorio.Update(Mapper.Map<Pregunta>(entidadUpdate));
-            }
-            else
-            {
-                var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
-                throw new UserFriendlyException(mensajeError);
-            }
         }
 
     }

@@ -18,10 +18,6 @@ namespace Bow.Administracion.Entidades
         public string Nivel { get; set; }
         public string Pista { get; set; }
         public bool EstadoActiva { get; set; }
-        public string FechaCreacion { get; set; }
-        public int UsuarioIdCreacion { get; set; }
-        public string FechaModificacion { get; set; }
-        public int? UsuarioIdModificacion { get; set; }
 
         public virtual ICollection<Puntaje> PuntajesPregunta { get; set; }
         public virtual ICollection<Respuesta> RespuestasPregunta { get; set; }

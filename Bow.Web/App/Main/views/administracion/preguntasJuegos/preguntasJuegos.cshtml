@@ -41,7 +41,7 @@
                 <tbody>
                     <tr ng-repeat="pregunta in vm.listaPreguntas">
                         <td>
-                            <a ng-click="vm.abrirModalPreguntas(pregunta.id, pregunta.texto, pregunta.juego)" title="@L("")Ver respuestas de la pregunta">
+                            <a ng-click="vm.abrirModalPreguntas(pregunta.id, pregunta.texto)" title="@L("")Ver respuestas de la pregunta">
                                 <i class="fa fa-question-circle"></i> {{pregunta.texto}}
                             </a>
                         </td>

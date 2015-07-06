@@ -139,7 +139,7 @@
            /************************************************************************
             * Llamado para abrir Modal para Gestionar Opciones
             ************************************************************************/
-           vm.abrirModalPreguntas = function (preguntaId, preguntaTexto, juego) {
+           vm.abrirModalPreguntas = function (preguntaId, preguntaTexto) {
                var modalInstance = $modal.open({
                    templateUrl: '/App/Main/views/administracion/preguntasJuegos/partials/modalGestionarRespuestas.cshtml',
                    controller: 'modalGestionarRespuestasController',
@@ -152,9 +152,6 @@
                        },
                        preguntaTexto: function () {
                            return preguntaTexto;
-                       },
-                       juego: function () {
-                           return juego;
                        }
                    }
                });

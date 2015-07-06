@@ -10,6 +10,6 @@ namespace Bow.Administracion.Repositorios
 {
     public interface IPuntajeRepositorio : IRepository<Puntaje>
     {
-        List<Puntaje> GetAllHistorialPuntajesByUsuario(string Usuario);
+        List<Puntaje> GetAllHistorialPuntajesByUsuario(int UsuarioId);
     }
 }

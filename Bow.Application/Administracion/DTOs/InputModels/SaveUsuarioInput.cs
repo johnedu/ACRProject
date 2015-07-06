@@ -11,7 +11,7 @@ namespace Bow.Administracion.DTOs.InputModels
     public class SaveUsuarioInput : IInputDto
     {
         [Required]
-        [MaxLength(1000)]
+        [MaxLength(200)]
         public string Coda { get; set; }
         [Required]
         [MaxLength(100)]

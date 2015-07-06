@@ -31,12 +31,6 @@ namespace Bow.Web
                                 new LocalizableString("menu_administracion_preguntasJuegos", BowConsts.LocalizationSourceName),
                                 url: "#/administracion/preguntasJuegos"
                             )
-                        ).AddItem(
-                            new MenuItemDefinition(
-                                "menu_administracion_entidadesDimensiones",
-                                new LocalizableString("menu_administracion_entidadesDimensiones", BowConsts.LocalizationSourceName),
-                                url: "#/administracion/entidadesDimensiones"
-                            )
                         )
                 );
         }

@@ -19,19 +19,14 @@ namespace Bow.Administracion.Repositorios
 
         }
 
-        public List<Mensaje> GetAllMensajesByEmisor(string Emisor)
+        public List<Mensaje> GetAllMensajesByEmisor(int EmisorId)
         {
-            return GetAll().Where(m => m.UsuarioEmisor.Coda == Emisor).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).ToList();
+            return GetAll().Where(m => m.UsuarioEmisorId == EmisorId).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).ToList();
         }
 
-        public List<Mensaje> GetAllMensajesByReceptor(string Receptor)
+        public List<Mensaje> GetAllMensajesByReceptor(int ReceptorId)
         {
-            return GetAll().Where(m => m.UsuarioReceptor.Coda == Receptor).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).ToList();
-        }
-
-        public Mensaje GetMensajeByIdWithReceptorAndEmisor(int MensajeId)
-        {
-            return GetAll().Where(m => m.Id == MensajeId).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).FirstOrDefault();
+            return GetAll().Where(m => m.UsuarioReceptorId == ReceptorId).Include(m => m.UsuarioEmisor).Include(m => m.UsuarioReceptor).OrderByDescending(m => m.Id).ToList();
         }
     }
 }

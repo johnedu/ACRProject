@@ -13,9 +13,5 @@ namespace Bow.Administracion.Entidades
         public string Pregunta { get; set; }
         public string Respuesta { get; set; }
         public bool EstadoActiva { get; set; }
-        public string FechaCreacion { get; set; }
-        public int UsuarioIdCreacion { get; set; }
-        public string FechaModificacion { get; set; }
-        public int? UsuarioIdModificacion { get; set; }
     }
 }

@@ -22,7 +22,5 @@ namespace Bow.Administracion.DTOs.InputModels
         public int JuegoId { get; set; }
         public int DimensionId { get; set; }
         public bool EstadoActiva { get; set; }
-        public int Usuario { get; set; }
-        public string Fecha { get; set; }
     }
 }

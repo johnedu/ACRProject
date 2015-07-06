@@ -11,6 +11,6 @@ namespace Bow.Administracion.DTOs.InputModels
 {
     public class GetAllMensajesByEmisorInput : IInputDto
     {
-        public string Emisor { get; set; }
+        public int EmisorId { get; set; }
     }
 }

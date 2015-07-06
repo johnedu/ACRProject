@@ -10,12 +10,10 @@ namespace Bow.Administracion.DTOs.InputModels
 {
     public class EnviarMensajeInput : IInputDto
     {
-        public int UsuarioEmisorId { get; set; }
         [Required]
-        public string CodaEmisor { get; set; }
+        public string UsuarioEmisorId { get; set; }
+        [Required]
         public int UsuarioReceptorId { get; set; }
-        [Required]
-        public string CodaReceptor { get; set; }
         [Required]
         [MaxLength(200)]
         public string Titulo { get; set; }

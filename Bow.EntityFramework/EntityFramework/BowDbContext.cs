@@ -44,7 +44,6 @@ namespace Bow.EntityFramework
             modelBuilder.Configurations.Add(new MensajeMap());
             modelBuilder.Configurations.Add(new PuntajeMap());
             modelBuilder.Configurations.Add(new RespuestaMap());
-            modelBuilder.Configurations.Add(new EntidadMap());
 
             base.OnModelCreating(modelBuilder);
         }

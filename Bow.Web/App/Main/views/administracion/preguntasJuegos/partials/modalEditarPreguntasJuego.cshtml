@@ -26,9 +26,14 @@
         </div>
         <div class="form-group" ng-class="{'has-error' : frmRegistrarEmpresaOrganizacion.selectedJuego.$dirty && frmRegistrarEmpresaOrganizacion.selectedJuego.$invalid }">
             <label class="control-label" for="selectedJuego">@L("")Juego</label>
-            <select ng-model="pregunta.juegoId" ng-options="to.id as to.nombre for to in listaJuegos" class="form-control" name="selectedJuego" id="selectedJuego" required ng-disabled="true">
+            <select ng-model="pregunta.juegoId" ng-options="to.id as to.nombre for to in listaJuegos" class="form-control" name="selectedJuego" id="selectedJuego" required>
                 <option value="">@L("")Seleccione...</option>
             </select>
+            <div ng-show="frmRegistrarEmpresaOrganizacion.selectedJuego.$dirty && frmRegistrarEmpresaOrganizacion.selectedJuego.$invalid">
+                <small ng-show="frmRegistrarEmpresaOrganizacion.selectedJuego.$error.required" class="text-danger">
+                    @L("")El juego de la pregunta es requerido
+                </small>
+            </div>
         </div>
         <div class="form-group" ng-class="{'has-error' : frmRegistrarEmpresaOrganizacion.selectedJuego.$dirty && frmRegistrarEmpresaOrganizacion.selectedJuego.$invalid }">
             <label class="control-label" for="selectedDimension">@L("")Dimesión</label>

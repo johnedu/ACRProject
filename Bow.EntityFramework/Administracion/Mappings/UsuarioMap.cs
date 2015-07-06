@@ -14,7 +14,7 @@ namespace Bow.Administracion.Mappings
         public UsuarioMap()
         {
             //Atributos
-            Property(d => d.Nombre).HasMaxLength(1000);
+            Property(d => d.Nombre).HasMaxLength(200);
             Property(d => d.Nombre).IsRequired();
 
             Property(d => d.Coda).HasMaxLength(100);

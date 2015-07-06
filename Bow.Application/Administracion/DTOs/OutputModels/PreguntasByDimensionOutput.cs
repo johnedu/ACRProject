@@ -11,7 +11,6 @@ namespace Bow.Administracion.DTOs.OutputModels
     {
         public string Texto { get; set; }
         public int JuegoId { get; set; }
-        public string Juego { get; set; }
         public int DimensionId { get; set; }
         public string Nivel { get; set; }
         public string Pista { get; set; }

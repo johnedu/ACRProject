@@ -71,7 +71,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion\Entidades\Entidad.cs" />
     <Compile Include="Administracion\Entidades\Juego.cs" />
     <Compile Include="Administracion\Entidades\Dimension.cs" />
     <Compile Include="Administracion\Entidades\Pregunta.cs">
@@ -82,7 +81,6 @@
     <Compile Include="Administracion\Entidades\Tipo.cs" />
     <Compile Include="Administracion\Entidades\Mensaje.cs" />
     <Compile Include="Administracion\Entidades\Usuario.cs" />
-    <Compile Include="Administracion\Repositorios\IEntidadRepositorio.cs" />
     <Compile Include="Administracion\Repositorios\IJuegoRepositorio.cs" />
     <Compile Include="Administracion\Repositorios\IDimensionRepositorio.cs" />
     <Compile Include="Administracion\Repositorios\IRespuestaRepositorio.cs" />

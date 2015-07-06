@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-md-10">
             <h2>{{preguntaTexto}}</h2>
-            <h3>( {{juego}} )</h3>
         </div>
         <div class="col-md-2 text-right">
             <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="cancelModal()"></button>
@@ -16,7 +15,7 @@
     <div class="row">
         <div class="col-md-12">
             <div ng-show="!mostrarFormulario">
-                <div class="row" ng-show="!btn_nuevo_disabled">
+                <div class="row">
                     <div class="col-md-6">
                         <a ng-click="mostrarFormularioNuevaRespuesta()" title="@L("")Nueva Respuesta">@L("")Nueva Respuesta <span class="glyphicon glyphicon-plus-sign font-size-16"></span></a>
                     </div>
@@ -30,7 +29,7 @@
                             <thead>
                                 <tr>
                                     <th>@L("")Texto</th>
-                                    <th class="text-center" ng-show="juego == 'Millonario'">@L("")Comodin 50/50</th>
+                                    <th class="text-center">@L("")Comodin 50/50</th>
                                     <th class="text-center">@L("")Correcta</th>
                                     <th class="text-center">@L("")Editar</th>
                                     <th class="text-center">@L("")Eliminar</th>
@@ -41,20 +40,20 @@
                                     <td>
                                         <strong>{{respuesta.texto}}</strong>
                                     </td>
-                                    <td class="text-center" ng-show="juego == 'Millonario'">
+                                    <td class="text-center">
                                         <span ng-show="respuesta.comodin50_50" class="glyphicon glyphicon-check"></span>
                                     </td>
                                     <td class="text-center">
                                         <span ng-show="respuesta.respuestaVerdadera" class="glyphicon glyphicon-check"></span>
                                     </td>
                                     <td class="text-center">
-                                        <a ng-click="mostrarFormularioEditarRespuesta(respuesta.id)" title="@L("")Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a ng-click="mostrarFormularioEditarRespuesta(respuesta.id)" title="@L("empresas_infoTributaria_opciones_tabla_editar_tooltip")"><span class="glyphicon glyphicon-pencil"></span></a>
                                     </td>
                                     <td class="text-center">
-                                        <a ng-click="eliminarRespuesta($index)" ng-show="!mensajeEliminar[$index]" title="@L("")Eliminar la respuesta"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a ng-click="eliminarOpcionInfoTributaria($index)" ng-show="!mensajeEliminar[$index]" title="@L("")Eliminar la respuesta"><span class="glyphicon glyphicon-trash"></span></a>
                                         <div ng-show="mensajeEliminar[$index]">
                                             @L("")¿Está seguro?<br />
-                                            <button class="btn btn-success btn-xs" ng-click="eliminarRespuestaOk(respuesta.id, $index)">@L("")Si</button>
+                                            <button class="btn btn-success btn-xs" ng-click="eliminarOpcionInfoTributariaOk(respuesta.id, $index)">@L("")Si</button>
                                             <button class="btn btn-danger btn-xs" ng-click="eliminarCancel($index)">@L("")No</button>
                                         </div>
                                     </td>
@@ -82,7 +81,7 @@
                             </small>
                         </div>
                     </div>
-                    <div class="row" ng-show="juego == 'Millonario'">
+                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <input type="checkbox" class="checkbox-inline" ng-model="respuesta.comodin50_50" />&nbsp;&nbsp;&nbsp;

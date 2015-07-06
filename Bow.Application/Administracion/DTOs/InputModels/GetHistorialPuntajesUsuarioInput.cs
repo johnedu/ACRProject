@@ -11,6 +11,6 @@ namespace Bow.Administracion.DTOs.InputModels
 {
     public class GetHistorialPuntajesUsuarioInput : IInputDto
     {
-        public string Usuario { get; set; }
+        public int UsuarioId { get; set; }
     }
 }
