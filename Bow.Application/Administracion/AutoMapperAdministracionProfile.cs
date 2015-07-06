@@ -51,11 +51,10 @@ namespace Bow.Administracion
             //  Respuestas Juego
             CreateMap<SaveRespuestaInput, Respuesta>();
             CreateMap<UpdateRespuestaInput, Respuesta>();
-            CreateMap<Respuesta, GetRespuestaOutput>();
+            CreateMap<Respuesta, GetRespuestaInput>();
             CreateMap<Respuesta, RespuestasByPreguntaOutput>();
 
             //  Tipos de Usuario
-
             CreateMap<Tipo, GetTipoPPROutput>();
             CreateMap<Tipo, GetTipoProfesionalReintegradorOutput>();
 
@@ -66,12 +65,6 @@ namespace Bow.Administracion
                 .ForMember(dest => dest.Juego, opt => opt.MapFrom(src => src.PreguntaPuntaje.JuegoPregunta.Nombre))
                 .ForMember(dest => dest.Puntaje, opt => opt.MapFrom(src => src.PuntajeValor));
             CreateMap<SavePuntajeInput, Puntaje>();
-
-            CreateMap<Juego, JuegoOutput>();
-
-            CreateMap<Dimension, DimensionOutput>();
-
-            //  Respuestas Juego
         }
     }
 }

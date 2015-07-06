@@ -11,7 +11,6 @@ namespace Bow.Administracion.DTOs.InputModels
 {
     public class GetAllPreguntasByDimensionInput : IInputDto
     {
-        public int JuegoId { get; set; }
         public int DimensionId { get; set; }
     }
 }

@@ -25,8 +25,6 @@ namespace Bow.Administracion
         private IPreguntaRepositorio _preguntaRepositorio;
         private IRespuestaRepositorio _respuestaRepositorio;
         private ITipoRepositorio _tipoRepositorio;
-        private IJuegoRepositorio _juegoRepositorio;
-        private IDimensionRepositorio _dimensionRepositorio;
 
         #endregion
 
@@ -38,9 +36,7 @@ namespace Bow.Administracion
             IPuntajeRepositorio puntajeRepositorio,
             IPreguntaRepositorio preguntaRepositorio,
             IRespuestaRepositorio respuestaRepositorio,
-            ITipoRepositorio tipoRepositorio,
-            IJuegoRepositorio juegoRepositorio,
-            IDimensionRepositorio dimensionRepositorio)
+            ITipoRepositorio tipoRepositorio)
         {
             _preguntaFrecuenteRepositorio = preguntaFrecuenteRepositorio;
             _mensajeRepositorio = mensajeRepositorio;
@@ -49,8 +45,6 @@ namespace Bow.Administracion
             _preguntaRepositorio = preguntaRepositorio;
             _respuestaRepositorio = respuestaRepositorio;
             _tipoRepositorio = tipoRepositorio;
-            _juegoRepositorio = juegoRepositorio;
-            _dimensionRepositorio = dimensionRepositorio;
         }
 
         /*********************************************************************************************
@@ -186,7 +180,7 @@ namespace Bow.Administracion
 
         public GetAllPreguntasByDimensionOutput GetAllPreguntasByDimension(GetAllPreguntasByDimensionInput dimension)
         {
-            var listaPreguntas = _preguntaRepositorio.GetAllList().Where(p => p.DimensionId == dimension.DimensionId && p.JuegoId == dimension.JuegoId).OrderBy(p => p.Texto);
+            var listaPreguntas = _preguntaRepositorio.GetAllList().Where(p => p.DimensionId == dimension.DimensionId).OrderBy(p => p.Texto);
             return new GetAllPreguntasByDimensionOutput { Preguntas = Mapper.Map<List<PreguntasByDimensionOutput>>(listaPreguntas) };
         }
 
@@ -305,18 +299,6 @@ namespace Bow.Administracion
         public void SavePuntaje(SavePuntajeInput puntaje)
         {
             var p = _puntajeRepositorio.Insert(Mapper.Map<Puntaje>(puntaje));
-        }
-
-        public GetAllJuegosOutput GetAllJuegos()
-        {
-            var listaJuegos = _juegoRepositorio.GetAllList().OrderBy(p => p.Nombre);
-            return new GetAllJuegosOutput { Juegos = Mapper.Map<List<JuegoOutput>>(listaJuegos) };
-        }
-
-        public GetAllDimensionesOutput GetAllDimensiones()
-        {
-            var listaDimensiones = _dimensionRepositorio.GetAllList().OrderBy(p => p.Nombre);
-            return new GetAllDimensionesOutput { Dimensiones = Mapper.Map<List<DimensionOutput>>(listaDimensiones) };
         }
 
     }

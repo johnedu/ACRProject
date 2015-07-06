@@ -73,10 +73,6 @@ namespace Bow.Administracion
         GetTipoProfesionalReintegradorOutput GetTipoProfesionalReintegrador();
 
         void SavePuntaje(SavePuntajeInput puntaje);
-
-        GetAllJuegosOutput GetAllJuegos();
-
-        GetAllDimensionesOutput GetAllDimensiones();
     }
 }
 

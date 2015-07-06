@@ -1,35 +1,17 @@
 ﻿(function () {
-    angular.module('app').controller('modalNuevoPreguntasJuegoController', ['$scope', '$modalInstance', 'abp.services.app.administracion',
+    angular.module('app').controller('modalNuevoPreguntasFrecuentesController', ['$scope', '$modalInstance', 'abp.services.app.administracion',
         function ($scope, $modalInstance, administracionService) {
 
-            $scope.pregunta = {
-                texto: '',
-                juegoId: '',
-                dimensionId: '',
-                nivel: '',
-                pista: '',
-                estadoActiva: true
+            $scope.preguntaFrecuente = {
+                pregunta: '',
+                respuesta: ''
             };
-
-            function cargarJuegos() {
-                administracionService.getAllJuegos().success(function (data) {
-                    $scope.listaJuegos = data.juegos;
-                });
-            }
-            cargarJuegos();
-
-            function cargarDimensiones() {
-                administracionService.getAllDimensiones().success(function (data) {
-                    $scope.listaDimensiones = data.dimensiones;
-                });
-            }
-            cargarDimensiones();
 
             $scope.okModal = function () {
 
-                administracionService.savePregunta($scope.pregunta)
+                administracionService.savePreguntaFrecuente($scope.preguntaFrecuente)
                     .success(function () {
-                        $modalInstance.close($scope.pregunta.texto);
+                        $modalInstance.close($scope.preguntaFrecuente.pregunta);
                     }).error(function (error) {
                         $scope.mensajeError = error.message;
                     });

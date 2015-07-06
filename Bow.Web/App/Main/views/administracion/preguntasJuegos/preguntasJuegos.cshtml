@@ -5,35 +5,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <a ng-click="vm.abrirModalNueva(vm.paisId)" title="">@L("")Registrar Nueva Pregunta <span class="glyphicon glyphicon-plus-sign font-size-16"></span></a>
         </div>
-        <div class="col-md-3 text-center">
-            <label class="control-label" for="selectedJuego">@L("")Juego</label>
-            <select ng-model="vm.selectedJuego" ng-options="to.id as to.nombre for to in vm.listaJuegos" class="form-control" name="selectedJuego" id="selectedJuego" required ng-change="vm.cargarPreguntas()">
-                <option value="">@L("")Seleccione...</option>
-            </select>
-        </div>
-        <div class="col-md-3 text-center">
-            <label class="control-label" for="selectedDimension">@L("")Dimesión</label>
-            <select ng-model="vm.selectedDimension" ng-options="to.id as to.nombre for to in vm.listaDimensiones" class="form-control" name="selectedDimension" id="selectedDimension" required ng-change="vm.cargarPreguntas()">
-                <option value="">@L("")Seleccione...</option>
-            </select>
-        </div>
-        <div class="col-md-3 text-right">
-            <p>{{vm.listaPreguntas.length}} @L("")Preguntas</p>
+        <div class="col-md-6 text-right">
+            <p>{{vm.preguntasFrecuentes.length}} @L("")Preguntas</p>
         </div>
     </div>
-    <br />
-    <div class="row" ng-show="vm.selectedJuego && vm.selectedDimension">
+    <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>@L("")Texto</th>
-                        <th>@L("")Pista</th>
-                        <th class="text-center">@L("")Nivel</th>
-                        <th class="text-center">@L("")Estado</th>
+                        <th>@L("")Nivel</th>
+                        <th class="text-center">@L("")Cambiar Estado</th>
                         <th class="text-center">@L("")Editar</th>
                         <th class="text-center">@L("")Eliminar</th>
                     </tr>
@@ -41,27 +27,16 @@
                 <tbody>
                     <tr ng-repeat="pregunta in vm.listaPreguntas">
                         <td>
-                            <a ng-click="vm.abrirModalPreguntas(pregunta.id, pregunta.texto)" title="@L("")Ver respuestas de la pregunta">
-                                <i class="fa fa-question-circle"></i> {{pregunta.texto}}
-                            </a>
+                            {{pregunta.texto}}
                         </td>
                         <td>
-                            {{pregunta.pista}}
-                        </td>
-                        <td class="text-center">
                             {{pregunta.nivel}}
                         </td>
                         <td class="text-center">
-                            <span ng-show="pregunta.estadoActiva">
-                                @L("")Activa
-                            </span>
-                            <span ng-show="!pregunta.estadoActiva">
-                                @L("")Inactiva
-                            </span>&nbsp;&nbsp;
-                            <a ng-click="vm.cambiarEstado(pregunta)" title="@L("")Cambiar Estado de la Pregunta"><span class="glyphicon glyphicon-refresh font-size-16"></span></a>
+                            <a ng-click="vm.cambiarEstado(pregunta.id)" title="@L("")Cambiar Estado de la Pregunta"><span class="glyphicon glyphicon-pencil font-size-16"></span></a>
                         </td>
                         <td class="text-center">
-                            <a ng-click="vm.abrirModalEditar(pregunta.id, pregunta.texto)" title="@L("")Editar la pregunta"><span class="glyphicon glyphicon-pencil font-size-16"></span></a>
+                            <a ng-click="vm.abrirModalEditar(pregunta.id)" title="@L("")Editar la pregunta"><span class="glyphicon glyphicon-pencil font-size-16"></span></a>
                         </td>
                         <td class="text-center">
                             <a ng-click="vm.abrirModalEliminar(pregunta.id)" title="@L("")Eliminar la pregunta"><span class="glyphicon glyphicon-trash font-size-16"></span></a>

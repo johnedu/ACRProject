@@ -104,15 +104,11 @@
     <Compile Include="Administracion\DTOs\InputModels\SaveUsuarioInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\UpdateRespuestaInput.cs" />
     <Compile Include="Administracion\DTOs\InputModels\UpdatePreguntaInput.cs" />
-    <Compile Include="Administracion\DTOs\OutputModels\GetAllDimensionesOutput.cs" />
-    <Compile Include="Administracion\DTOs\OutputModels\GetAllJuegosOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetHistorialPuntajesUsuarioOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasFrecuentesActivasOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllRespuestasByPreguntaOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllPreguntasByDimensionOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetPreguntaAleatoriaByDimensionAndJuegoOutput.cs" />
-    <Compile Include="Administracion\DTOs\OutputModels\DimensionOutput.cs" />
-    <Compile Include="Administracion\DTOs\OutputModels\JuegoOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\PuntajeUsuarioOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetMensajesSinLeerByUsuarioOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetTipoProfesionalReintegradorOutput.cs" />

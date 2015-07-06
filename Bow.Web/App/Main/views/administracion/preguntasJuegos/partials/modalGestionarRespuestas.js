@@ -1,41 +1,41 @@
 ﻿(function () {
-    angular.module('app').controller('modalGestionarRespuestasController', ['$scope', '$modalInstance', 'preguntaId', 'preguntaTexto', 'abp.services.app.administracion',
-        function ($scope, $modalInstance, preguntaId, preguntaTexto, administracionService) {
+    angular.module('app').controller('modalGestionarOpcionesController', ['$scope', '$modalInstance', 'infoTributariaId', 'infoTributariaNombre', 'abp.services.app.empresas',
+        function ($scope, $modalInstance, infoTributariaId, infoTributariaNombre, empresasService) {
 
             ////Inicializando modelos
 
             $scope.mensajeEliminar = [];
-            $scope.respuestasPregunta = [];
-            $scope.preguntaTexto = preguntaTexto;
+            $scope.opcionesInfoTributaria = [];
+            $scope.nombreInfoTributaria = infoTributariaNombre;
             $scope.mostrarFormulario = false;
             $scope.accionFormulario = "Agregar";
 
-            $scope.respuesta = {
-                texto: '',
-                comodin50_50: false,
-                respuestaVerdadera: false,
-                preguntaId: preguntaId
+            $scope.opcionInfoTributaria = {
+                nombre: '',
+                infoTributariaId: ''
             };
 
             /********************************************************************
              * Funcion para cargar las opciones de la información tributaria seleccionada
              ********************************************************************/
-            function cargarRespuestas() {
-                administracionService.getAllRespuestasByPregunta({ preguntaId: preguntaId })
+            function cargarOpcionesInfoTributaria() {
+                empresasService.getInfoTributariaOpciones({ infoTributariaId: infoTributariaId })
                     .success(function (data) {
-                        $scope.respuestasPregunta = bow.tablas.paginar(data.respuestas, 5);
+                        $scope.opcionesInfoTributaria = bow.tablas.paginar(data.infoTributariaOpciones, 5);
                     });
             }
-            cargarRespuestas();
+
+            cargarOpcionesInfoTributaria();
 
             /********************************************************************
              * Funcion para crear una nueva opción de información tributaria
              ********************************************************************/
-            function crearRespuesta() {
-                administracionService.saveRespuesta($scope.respuesta)
+            function crearOpcionInfoTributaria() {
+                $scope.opcionInfoTributaria.infoTributariaId = infoTributariaId;
+                empresasService.saveInfoTributariaOpcion($scope.opcionInfoTributaria)
                     .success(function () {
-                        abp.notify.info(abp.localization.localize('', 'Bow') + 'La respuesta se ha creado correctamente.', abp.localization.localize('' + 'Información', 'Bow'));
-                        cargarRespuestas();
+                        abp.notify.info(abp.localization.localize('empresas_infoTributaria_opciones_notificacionInsertado', 'Bow'), abp.localization.localize('empresas_infoTributaria_opciones_mensaje_informacion', 'Bow'));
+                        cargarOpcionesInfoTributaria();
                         $scope.mostrarFormulario = false;
                     }).error(function (error) {
                         $scope.mensajeError = error.message;
@@ -45,11 +45,12 @@
             /********************************************************************
              * Funcion para editar una opción de información tributaria
              ********************************************************************/
-            function editarRespuesta() {
-                administracionService.updateRespuesta($scope.respuesta)
+            function editarOpcionInfoTributaria() {
+                $scope.opcionInfoTributaria.InfoTributariaId = infoTributariaId;
+                empresasService.updateInfoTributariaOpcion($scope.opcionInfoTributaria)
                     .success(function () {
-                        abp.notify.info(abp.localization.localize('', 'Bow') + 'La respuesta se ha modificado correctamente.', abp.localization.localize('' + 'Información', 'Bow'));
-                        cargarRespuestas();
+                        abp.notify.info(abp.localization.localize('empresas_infoTributaria_opciones_notificacionModificado', 'Bow'), abp.localization.localize('empresas_infoTributaria_opciones_mensaje_informacion', 'Bow'));
+                        cargarOpcionesInfoTributaria();
                         $scope.mostrarFormulario = false;
                     }).error(function (error) {
                         $scope.mensajeError = error.message;
@@ -59,16 +60,27 @@
             /********************************************************************
              * Funciones para eliminar una opción de Información Tributaria
              ********************************************************************/
-            $scope.eliminarRespuesta = function ($index) {
-                $scope.mensajeEliminar[$index] = true;
+            $scope.eliminarOpcionInfoTributaria = function (infoTributariaId, $index) {
+                empresasService.puedeEliminarInfoTributariaOpcion({ id: infoTributariaId })
+                   .success(function (data) {
+                       if (data.puedeEliminar) {
+                           $scope.mensajeEliminar[$index] = true;
+                       }
+                       else {
+                           abp.notify.info(abp.localization.localize('empresas_infoTributaria_opciones_notificacion_nosePuedeEliminar', 'Bow'), abp.localization.localize('empresas_infoTributaria_opciones_mensaje_informacion', 'Bow'));
+                       }
+                   }).error(function (error) {
+                       $scope.mensajeError = error.message;
+                   });
+
             };
 
-            $scope.eliminarRespuestaOk = function (respuestaId, $index) {
-                administracionService.deleteRespuesta({ id: respuestaId })
+            $scope.eliminarOpcionInfoTributariaOk = function (infoTributariaId, $index) {
+                empresasService.deleteInfoTributariaOpcion({ id: infoTributariaId })
                    .success(function (data) {
                        $scope.mensajeEliminar[$index] = false;
-                       abp.notify.info(abp.localization.localize('', 'Bow') + 'La respuesta se ha eliminado correctamente.', abp.localization.localize('' + 'Información', 'Bow'));
-                       cargarRespuestas();
+                       abp.notify.info(abp.localization.localize('empresas_infoTributaria_opciones_notificacionEliminado', 'Bow'), abp.localization.localize('empresas_infoTributaria_opciones_mensaje_informacion', 'Bow'));
+                       cargarOpcionesInfoTributaria();
                    }).error(function (error) {
                        $scope.mensajeError = error.message;
                    });
@@ -78,24 +90,22 @@
                 $scope.mensajeEliminar[$index] = false;
             }
 
-            $scope.mostrarFormularioNuevaRespuesta = function () {
-                $scope.respuesta = {
-                    texto: '',
-                    comodin50_50: false,
-                    respuestaVerdadera: false,
-                    preguntaId: preguntaId
+            $scope.mostrarFormularioNuevaInfoTributaria = function () {
+                $scope.opcionInfoTributaria = {
+                    nombre: '',
+                    infoTributariaId: ''
                 };
                 $scope.mensajeError = null;
                 $scope.mostrarFormulario = true;
                 $scope.accionFormulario = "Agregar";
                 //  Limpiamos el formulario para que no se muestren las clases 'has-error'
-                $scope.formNuevaRespuesta.$setPristine();
+                $scope.formNuevaOpcionInfoTributaria.$setPristine();
             }
 
-            $scope.mostrarFormularioEditarRespuesta = function (respuestaId) {
+            $scope.mostrarFormularioEditarInfoTributaria = function (opcionInfoTributariaId) {
                 $scope.mensajeError = null;
-                administracionService.getRespuesta({ id: respuestaId }).success(function (data) {
-                    $scope.respuesta = data;
+                empresasService.getInfoTributariaOpcion({ id: opcionInfoTributariaId }).success(function (data) {
+                    $scope.opcionInfoTributaria = data;
                 });
                 $scope.mostrarFormulario = true;
                 $scope.accionFormulario = "Editar";
@@ -105,13 +115,13 @@
                 $scope.mostrarFormulario = false;
             }
 
-            $scope.guardarModificarRespuesta = function () {
+            $scope.guardarModificarOpcionInfoTributaria = function () {
                 $scope.mensajeError = null;
                 if ($scope.accionFormulario == "Agregar") {
-                    crearRespuesta();
+                    crearOpcionInfoTributaria();
                 }
                 else {
-                    editarRespuesta();
+                    editarOpcionInfoTributaria();
                 }
             }
 
