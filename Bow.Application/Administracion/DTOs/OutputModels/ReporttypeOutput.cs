@@ -9,6 +9,6 @@ namespace Bow.Administracion.DTOs.OutputModels
 {
     public class ReporttypeOutput : EntityDto
     {
-        public string title { get; set; }
+        public string text { get; set; }
     }
 }
