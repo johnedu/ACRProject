@@ -10,7 +10,9 @@ namespace Bow.Administracion.Entidades
 {
     public class PreguntaFrecuente : EntidadMultiTenant
     {
-        public string Pregunta { get; set; }
-        public string Respuesta { get; set; }
+        public string text { get; set; }
+        public string answer { get; set; }
+        public DateTime published_at { get; set; }
+        public string url { get; set; }
     }
 }

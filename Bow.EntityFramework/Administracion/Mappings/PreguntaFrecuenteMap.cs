@@ -14,10 +14,10 @@ namespace Bow.Administracion.Mappings
         public PreguntaFrecuenteMap()
         {
             //Atributos
-            Property(faq => faq.Pregunta).HasMaxLength(200);
-            Property(faq => faq.Pregunta).IsRequired();
-            Property(faq => faq.Respuesta).HasMaxLength(300);
-            Property(faq => faq.Respuesta).IsRequired();
+            Property(faq => faq.text).HasMaxLength(1000);
+            Property(faq => faq.text).IsRequired();
+            Property(faq => faq.answer).HasMaxLength(10000);
+            Property(faq => faq.answer).IsRequired();
 
             //Tabla
             ToTable("pregunta_frecuente");

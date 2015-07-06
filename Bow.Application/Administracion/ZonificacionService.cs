@@ -56,13 +56,13 @@ namespace Bow.Administracion
 
         public GetAllPreguntasFrecuentesOutput Faqs()
         {
-            var listaPaises = _preguntaFrecuenteRepositorio.GetAllList().OrderBy(p => p.Pregunta);
+            var listaPaises = _preguntaFrecuenteRepositorio.GetAllList().OrderBy(p => p.text);
             return new GetAllPreguntasFrecuentesOutput { PreguntasFrecuentes = Mapper.Map<List<PreguntaFrecuenteOutput>>(listaPaises) };
         }
 
         public void SavePreguntaFrecuente(SavePreguntaFrecuenteInput nuevoPais)
         {
-            PreguntaFrecuente existePais = _preguntaFrecuenteRepositorio.FirstOrDefault(p => p.Pregunta.ToLower() == nuevoPais.Pregunta.ToLower());
+            PreguntaFrecuente existePais = _preguntaFrecuenteRepositorio.FirstOrDefault(p => p.text.ToLower() == nuevoPais.Pregunta.ToLower());
 
             if (existePais == null)
             {
@@ -85,7 +85,7 @@ namespace Bow.Administracion
 
         public void UpdatePreguntaFrecuente(UpdatePreguntaFrecuenteInput paisUpdate)
         {
-            PreguntaFrecuente existePais = _preguntaFrecuenteRepositorio.FirstOrDefault(p => p.Pregunta.ToLower() == paisUpdate.Pregunta.ToLower() && p.Id != paisUpdate.Id);
+            PreguntaFrecuente existePais = _preguntaFrecuenteRepositorio.FirstOrDefault(p => p.text.ToLower() == paisUpdate.Pregunta.ToLower() && p.Id != paisUpdate.Id);
 
             if (existePais == null)
             {
@@ -124,7 +124,7 @@ namespace Bow.Administracion
 
         public GetAllLocationsOutput Points()
         {
-            var LocationsList = _casesRepositorio.GetAllList().OrderBy(p => p.title);
+            var LocationsList = _locationsRepositorio.GetAllList().OrderBy(p => p.name);
             return new GetAllLocationsOutput { Points = Mapper.Map<List<LocationsOutput>>(LocationsList) };
         }
 

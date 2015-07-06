@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201507060625267_otras_tablas.Designer.cs">
       <DependentUpon>201507060625267_otras_tablas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507060649198_tabla_faqs1.cs" />
+    <Compile Include="Migrations\201507060649198_tabla_faqs1.Designer.cs">
+      <DependentUpon>201507060649198_tabla_faqs1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BowDataModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507060625267_otras_tablas.resx">
       <DependentUpon>201507060625267_otras_tablas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507060649198_tabla_faqs1.resx">
+      <DependentUpon>201507060649198_tabla_faqs1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
