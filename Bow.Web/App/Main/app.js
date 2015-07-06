@@ -43,10 +43,10 @@
                     templateUrl: '/App/Main/views/home/home.cshtml',
                     menu: 'Home' //Matches to name of 'Home' menu in BowNavigationProvider
                 })
-                .state('index', {
-                    url: '/index',
-                    templateUrl: '/App/Main/views/administracion/index.cshtml',
-                    menu: 'index'
+                .state('zonificacionPais', {
+                    url: '/administracion/zonificacion/:paisId',
+                    templateUrl: '/App/Main/views/zonificacion/departamento/departamento.cshtml',
+                    menu: 'menu_administracion_zonificacion'
                 })
                 .state('preguntasFrecuentes', {
                     url: '/administracion/preguntasFrecuentes',
