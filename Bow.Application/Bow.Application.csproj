@@ -83,6 +83,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\DTOs\InputModels\SaveCaseInput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllCasesOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\CasesOutput.cs" />
     <Compile Include="BowApplicationModule.cs" />
     <Compile Include="BowAppServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

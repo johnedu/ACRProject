@@ -36,6 +36,7 @@ namespace Bow.EntityFramework
 
             modelBuilder.HasDefaultSchema("bow");
             modelBuilder.Configurations.Add(new PreguntaFrecuenteMap());
+            modelBuilder.Configurations.Add(new CasesMap());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -23,6 +23,10 @@ namespace Bow.Administracion
         void DeletePreguntaFrecuente(DeletePreguntaFrecuenteInput paisEliminar);
 
         void UpdatePreguntaFrecuente(UpdatePreguntaFrecuenteInput paisUpdate);
+
+        GetAllCasesOutput GetCases();
+
+        void SaveCase(SaveCaseInput nuevoCase);
     }
 }
 

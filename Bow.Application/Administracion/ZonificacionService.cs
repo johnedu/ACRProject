@@ -18,34 +18,36 @@ namespace Bow.Administracion
     public class ZonificacionService : IZonificacionService
     {
         #region Repositorios
-        private IPreguntaFrecuenteRepositorio _paisRepositorio;
+        private IPreguntaFrecuenteRepositorio _preguntaFrecuenteRepositorio;
+        private ICasesRepositorio _casesRepositorio;
 
         #endregion
 
         //Inyección de Dependencia en el Servicio
-        public ZonificacionService(IPreguntaFrecuenteRepositorio paisRepositorio)
+        public ZonificacionService(IPreguntaFrecuenteRepositorio preguntaFrecuenteRepositorio, ICasesRepositorio casesRepositorio)
         {
-            _paisRepositorio = paisRepositorio;
+            _preguntaFrecuenteRepositorio = preguntaFrecuenteRepositorio;
+            _casesRepositorio = casesRepositorio;
         }
 
         public GetPreguntaFrecuenteOutput GetPreguntaFrecuente(GetPreguntaFrecuenteInput paisInput)
         {
-            return Mapper.Map<GetPreguntaFrecuenteOutput>(_paisRepositorio.Get(paisInput.Id));
+            return Mapper.Map<GetPreguntaFrecuenteOutput>(_preguntaFrecuenteRepositorio.Get(paisInput.Id));
         }
 
         public GetAllPreguntasFrecuentesOutput GetAllPreguntasFrecuentes()
         {
-            var listaPaises = _paisRepositorio.GetAllList().OrderBy(p => p.Pregunta);
+            var listaPaises = _preguntaFrecuenteRepositorio.GetAllList().OrderBy(p => p.Pregunta);
             return new GetAllPreguntasFrecuentesOutput { PreguntasFrecuentes = Mapper.Map<List<PreguntaFrecuenteOutput>>(listaPaises) };
         }
 
         public void SavePreguntaFrecuente(SavePreguntaFrecuenteInput nuevoPais)
         {
-            PreguntaFrecuente existePais = _paisRepositorio.FirstOrDefault(p => p.Pregunta.ToLower() == nuevoPais.Pregunta.ToLower());
+            PreguntaFrecuente existePais = _preguntaFrecuenteRepositorio.FirstOrDefault(p => p.Pregunta.ToLower() == nuevoPais.Pregunta.ToLower());
 
             if (existePais == null)
             {
-                _paisRepositorio.Insert(Mapper.Map<PreguntaFrecuente>(nuevoPais));
+                _preguntaFrecuenteRepositorio.Insert(Mapper.Map<PreguntaFrecuente>(nuevoPais));
             }
             else
             {
@@ -56,23 +58,44 @@ namespace Bow.Administracion
 
         public void DeletePreguntaFrecuente(DeletePreguntaFrecuenteInput paisEliminar)
         {
-            
-                _paisRepositorio.Delete(paisEliminar.Id);
+
+            _preguntaFrecuenteRepositorio.Delete(paisEliminar.Id);
             
 
         }
 
         public void UpdatePreguntaFrecuente(UpdatePreguntaFrecuenteInput paisUpdate)
         {
-            PreguntaFrecuente existePais = _paisRepositorio.FirstOrDefault(p => p.Pregunta.ToLower() == paisUpdate.Pregunta.ToLower() && p.Id != paisUpdate.Id);
+            PreguntaFrecuente existePais = _preguntaFrecuenteRepositorio.FirstOrDefault(p => p.Pregunta.ToLower() == paisUpdate.Pregunta.ToLower() && p.Id != paisUpdate.Id);
 
             if (existePais == null)
             {
-                var paisActualizar = _paisRepositorio.Update(Mapper.Map<PreguntaFrecuente>(paisUpdate));
+                var paisActualizar = _preguntaFrecuenteRepositorio.Update(Mapper.Map<PreguntaFrecuente>(paisUpdate));
             }
             else
             {
                 var mensajeError = LocalizationHelper.GetString("Bow", "zonificacion_pais_validarNombrePais");
+                throw new UserFriendlyException(mensajeError);
+            }
+        }
+
+        public GetAllCasesOutput GetCases()
+        {
+            var CasesList = _casesRepositorio.GetAllList().OrderBy(p => p.title);
+            return new GetAllCasesOutput { Cases = Mapper.Map<List<CasesOutput>>(CasesList) };
+        }
+
+        public void SaveCase(SaveCaseInput nuevoCase)
+        {
+            Cases existeCase = _casesRepositorio.FirstOrDefault(p => p.title.ToLower() == nuevoCase.title.ToLower());
+
+            if (existeCase == null)
+            {
+                _casesRepositorio.Insert(Mapper.Map<Cases>(nuevoCase));
+            }
+            else
+            {
+                var mensajeError = LocalizationHelper.GetString("Bow", "") + "El caso ya existe";
                 throw new UserFriendlyException(mensajeError);
             }
         }

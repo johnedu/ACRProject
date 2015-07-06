@@ -71,6 +71,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Entidades\Cases.cs" />
+    <Compile Include="Administracion\Repositorios\ICasesRepositorio.cs" />
     <Compile Include="BowConsts.cs" />
     <Compile Include="BowCoreModule.cs" />
     <Compile Include="EntidadBase\EntidadMultiTenant.cs" />

@@ -86,12 +86,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Mappings\CasesMap.cs" />
+    <Compile Include="Administracion\Repositorios\CasesRepositorio.cs" />
     <Compile Include="EntityFramework\BowDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\BowRepositoryBase.cs" />
     <Compile Include="MappingsBase\MultiTenantMap.cs" />
     <Compile Include="Migrations\201503200440562_tabla_faqs.cs" />
     <Compile Include="Migrations\201503200440562_tabla_faqs.Designer.cs">
       <DependentUpon>201503200440562_tabla_faqs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507060440223_tabla_cases.cs" />
+    <Compile Include="Migrations\201507060440223_tabla_cases.Designer.cs">
+      <DependentUpon>201507060440223_tabla_cases.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BowDataModule.cs" />
@@ -112,6 +118,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503200440562_tabla_faqs.resx">
       <DependentUpon>201503200440562_tabla_faqs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507060440223_tabla_cases.resx">
+      <DependentUpon>201507060440223_tabla_cases.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
