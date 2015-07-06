@@ -24,7 +24,7 @@ namespace Bow.Zonificacion
             CreateMap<PreguntaFrecuente, GetPreguntaFrecuenteOutput>();
             CreateMap<PreguntaFrecuente, PreguntaFrecuenteOutput>();
 
-            CreateMap<SaveDriverInput, Cases>();
+            CreateMap<SaveCaseInput, Cases>();
             CreateMap<Cases, CasesOutput>();
 
             CreateMap<SaveLocationInput, Locations>();
