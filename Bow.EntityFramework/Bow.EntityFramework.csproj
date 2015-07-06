@@ -86,7 +86,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Mappings\DriverMap.cs" />
+    <Compile Include="Administracion\Mappings\SliderMap.cs" />
+    <Compile Include="Administracion\Mappings\ReportTypeMap.cs" />
+    <Compile Include="Administracion\Mappings\DiagnosticMap.cs" />
+    <Compile Include="Administracion\Mappings\NewsMap.cs" />
+    <Compile Include="Administracion\Mappings\LocationsMap.cs" />
     <Compile Include="Administracion\Mappings\CasesMap.cs" />
+    <Compile Include="Administracion\Repositorios\DriverRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\SliderRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\ReportTypeRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\DiagnosticRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\NewsRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\LocationsRepositorio.cs" />
     <Compile Include="Administracion\Repositorios\CasesRepositorio.cs" />
     <Compile Include="EntityFramework\BowDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\BowRepositoryBase.cs" />
@@ -98,6 +110,10 @@
     <Compile Include="Migrations\201507060440223_tabla_cases.cs" />
     <Compile Include="Migrations\201507060440223_tabla_cases.Designer.cs">
       <DependentUpon>201507060440223_tabla_cases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507060625267_otras_tablas.cs" />
+    <Compile Include="Migrations\201507060625267_otras_tablas.Designer.cs">
+      <DependentUpon>201507060625267_otras_tablas.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="BowDataModule.cs" />
@@ -121,6 +137,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507060440223_tabla_cases.resx">
       <DependentUpon>201507060440223_tabla_cases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507060625267_otras_tablas.resx">
+      <DependentUpon>201507060625267_otras_tablas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,7 +16,7 @@ namespace Bow.Administracion
     {
         GetPreguntaFrecuenteOutput GetPreguntaFrecuente(GetPreguntaFrecuenteInput paisInput);
 
-        GetAllPreguntasFrecuentesOutput GetAllPreguntasFrecuentes();
+        GetAllPreguntasFrecuentesOutput Faqs();
 
         void SavePreguntaFrecuente(SavePreguntaFrecuenteInput nuevoPais);
 
@@ -24,9 +24,24 @@ namespace Bow.Administracion
 
         void UpdatePreguntaFrecuente(UpdatePreguntaFrecuenteInput paisUpdate);
 
-        GetAllCasesOutput GetCases();
+        GetAllCasesOutput Cases();
 
-        void SaveCase(SaveCaseInput nuevoCase);
+        void Cases(SaveCaseInput nuevoCase);
+
+        GetAllLocationsOutput Points();
+
+        void Points(SaveLocationInput nuevaLocation);
+
+        GetAllNewsOutput News();
+
+        GetAllDiagnosticOutput Diagnostic();
+
+        GetAllReporttypeOutput Reporttype();
+
+        GetAllSliderOutput Slider();
+
+        void Driver(SaveDriverInput nuevoDriver);
+
     }
 }
 

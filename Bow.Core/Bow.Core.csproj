@@ -71,7 +71,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administracion\Entidades\Driver.cs" />
+    <Compile Include="Administracion\Entidades\Slider.cs" />
+    <Compile Include="Administracion\Entidades\ReportType.cs" />
+    <Compile Include="Administracion\Entidades\Diagnostic.cs" />
+    <Compile Include="Administracion\Entidades\News.cs" />
+    <Compile Include="Administracion\Entidades\Locations.cs" />
     <Compile Include="Administracion\Entidades\Cases.cs" />
+    <Compile Include="Administracion\Repositorios\IDriverRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\ISliderRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\IReportTypeRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\IDiagnosticRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\INewsRepositorio.cs" />
+    <Compile Include="Administracion\Repositorios\ILocationsRepositorio.cs" />
     <Compile Include="Administracion\Repositorios\ICasesRepositorio.cs" />
     <Compile Include="BowConsts.cs" />
     <Compile Include="BowCoreModule.cs" />

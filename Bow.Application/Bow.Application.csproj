@@ -83,7 +83,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administracion\DTOs\InputModels\SaveCaseInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SaveDriverInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SaveLocationInput.cs" />
+    <Compile Include="Administracion\DTOs\InputModels\SaveCaseInput .cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllSliderOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllReporttypeOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\SliderOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\ReporttypeOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\DiagnosticOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllDiagnosticOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\NewsOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllNewsOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\LocationsOutput.cs" />
+    <Compile Include="Administracion\DTOs\OutputModels\GetAllLocationsOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\GetAllCasesOutput.cs" />
     <Compile Include="Administracion\DTOs\OutputModels\CasesOutput.cs" />
     <Compile Include="BowApplicationModule.cs" />

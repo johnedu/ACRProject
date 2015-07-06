@@ -20,14 +20,33 @@ namespace Bow.Administracion
         #region Repositorios
         private IPreguntaFrecuenteRepositorio _preguntaFrecuenteRepositorio;
         private ICasesRepositorio _casesRepositorio;
+        private ILocationsRepositorio _locationsRepositorio;
+        private INewsRepositorio _newsRepositorio;
+        private IDiagnosticRepositorio _diagnosticRepositorio;
+        private IReportTypeRepositorio _reportTypeRepositorio;
+        private ISliderRepositorio _sliderRepositorio;
+        private IDriverRepositorio _driverRepositorio;
 
         #endregion
 
         //Inyección de Dependencia en el Servicio
-        public ZonificacionService(IPreguntaFrecuenteRepositorio preguntaFrecuenteRepositorio, ICasesRepositorio casesRepositorio)
+        public ZonificacionService( IPreguntaFrecuenteRepositorio preguntaFrecuenteRepositorio,
+                                    ICasesRepositorio casesRepositorio,
+                                    ILocationsRepositorio locationsRepositorio,
+                                    INewsRepositorio newsRepositorio,
+                                    IDiagnosticRepositorio diagnosticRepositorio,
+                                    IReportTypeRepositorio reportTypeRepositorio,
+                                    ISliderRepositorio sliderRepositorio,
+                                    IDriverRepositorio driverRepositorio)
         {
             _preguntaFrecuenteRepositorio = preguntaFrecuenteRepositorio;
             _casesRepositorio = casesRepositorio;
+            _locationsRepositorio = locationsRepositorio;
+            _newsRepositorio = newsRepositorio;
+            _diagnosticRepositorio = diagnosticRepositorio;
+            _reportTypeRepositorio = reportTypeRepositorio;
+            _sliderRepositorio = sliderRepositorio;
+            _driverRepositorio = driverRepositorio;
         }
 
         public GetPreguntaFrecuenteOutput GetPreguntaFrecuente(GetPreguntaFrecuenteInput paisInput)
@@ -35,7 +54,7 @@ namespace Bow.Administracion
             return Mapper.Map<GetPreguntaFrecuenteOutput>(_preguntaFrecuenteRepositorio.Get(paisInput.Id));
         }
 
-        public GetAllPreguntasFrecuentesOutput GetAllPreguntasFrecuentes()
+        public GetAllPreguntasFrecuentesOutput Faqs()
         {
             var listaPaises = _preguntaFrecuenteRepositorio.GetAllList().OrderBy(p => p.Pregunta);
             return new GetAllPreguntasFrecuentesOutput { PreguntasFrecuentes = Mapper.Map<List<PreguntaFrecuenteOutput>>(listaPaises) };
@@ -79,25 +98,80 @@ namespace Bow.Administracion
             }
         }
 
-        public GetAllCasesOutput GetCases()
+        public GetAllCasesOutput Cases()
         {
             var CasesList = _casesRepositorio.GetAllList().OrderBy(p => p.title);
             return new GetAllCasesOutput { Cases = Mapper.Map<List<CasesOutput>>(CasesList) };
         }
 
-        public void SaveCase(SaveCaseInput nuevoCase)
+        public void Cases(SaveCaseInput nuevoCase)
         {
             Cases existeCase = _casesRepositorio.FirstOrDefault(p => p.title.ToLower() == nuevoCase.title.ToLower());
 
             if (existeCase == null)
             {
-                _casesRepositorio.Insert(Mapper.Map<Cases>(nuevoCase));
+                Cases caso = Mapper.Map<Cases>(nuevoCase);
+                caso.published_at = DateTime.Now;
+                caso.url = "www.google.com";
+                _casesRepositorio.Insert(caso);
             }
             else
             {
                 var mensajeError = LocalizationHelper.GetString("Bow", "") + "El caso ya existe";
                 throw new UserFriendlyException(mensajeError);
             }
+        }
+
+        public GetAllLocationsOutput Points()
+        {
+            var LocationsList = _casesRepositorio.GetAllList().OrderBy(p => p.title);
+            return new GetAllLocationsOutput { Points = Mapper.Map<List<LocationsOutput>>(LocationsList) };
+        }
+
+        public void Points(SaveLocationInput nuevaLocation)
+        {
+            Locations existeLocation = _locationsRepositorio.FirstOrDefault(p => p.description.ToLower() == nuevaLocation.description.ToLower());
+
+            if (existeLocation == null)
+            {
+                Locations location = Mapper.Map<Locations>(nuevaLocation);
+                location.distance = "";
+                _locationsRepositorio.Insert(location);
+            }
+            else
+            {
+                var mensajeError = LocalizationHelper.GetString("Bow", "") + "El caso ya existe";
+                throw new UserFriendlyException(mensajeError);
+            }
+        }
+
+        public GetAllNewsOutput News()
+        {
+            var NewsList = _newsRepositorio.GetAllList().OrderBy(p => p.title);
+            return new GetAllNewsOutput { News = Mapper.Map<List<NewsOutput>>(NewsList) };
+        }
+
+        public GetAllDiagnosticOutput Diagnostic()
+        {
+            var DiagnosticList = _diagnosticRepositorio.GetAllList().OrderBy(p => p.title);
+            return new GetAllDiagnosticOutput { Diagnostic = Mapper.Map<List<DiagnosticOutput>>(DiagnosticList) };
+        }
+
+        public GetAllReporttypeOutput Reporttype()
+        {
+            var ReporttypeList = _reportTypeRepositorio.GetAllList().OrderBy(p => p.text);
+            return new GetAllReporttypeOutput { Reporttype = Mapper.Map<List<ReporttypeOutput>>(ReporttypeList) };
+        }
+
+        public GetAllSliderOutput Slider()
+        {
+            var SliderList = _sliderRepositorio.GetAllList();
+            return new GetAllSliderOutput { Slider = Mapper.Map<List<SliderOutput>>(SliderList) };
+        }
+
+        public void Driver(SaveDriverInput nuevoDriver)
+        {
+            _driverRepositorio.Insert(Mapper.Map<Driver>(nuevoDriver));
         }
     }
 }

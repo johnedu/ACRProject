@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace Bow.Administracion.DTOs.InputModels
 {
-    public class SaveCaseInput : IInputDto
+    public class SaveLocationInput : IInputDto
     {
-        public string title { get; set; }
+        public string latitude { get; set; }
+        public string longitude { get; set; }
         public string description { get; set; }
-        public string published_at { get; set; }
-        public string url { get; set; }
-        public string image { get; set; }
+        public string name { get; set; }
     }
 }
