@@ -2123,13 +2123,13 @@ th {
 }
 .table-hover > tbody > tr:hover {
   background-color: #53ccd4 !important;
-  color: #ffffff;
+  color: #06939c;
 }
 .table-hover > tbody > tr:hover > td {
   background-color: #53ccd4 !important;
 }
 .table-hover > tbody > tr:hover > td > a {
-  color: #ffffff;
+  color: #06939c;
 }
 table col[class*="col-"] {
   position: static;
@@ -2246,6 +2246,90 @@ table th[class*="col-"] {
 .table-hover > tbody > tr:hover > .danger,
 .table-hover > tbody > tr.danger:hover > th {
   background-color: #ebcccc;
+}
+.table > thead > tr > td.bow-beneficio-propio,
+.table > tbody > tr > td.bow-beneficio-propio,
+.table > tfoot > tr > td.bow-beneficio-propio,
+.table > thead > tr > th.bow-beneficio-propio,
+.table > tbody > tr > th.bow-beneficio-propio,
+.table > tfoot > tr > th.bow-beneficio-propio,
+.table > thead > tr.bow-beneficio-propio > td,
+.table > tbody > tr.bow-beneficio-propio > td,
+.table > tfoot > tr.bow-beneficio-propio > td,
+.table > thead > tr.bow-beneficio-propio > th,
+.table > tbody > tr.bow-beneficio-propio > th,
+.table > tfoot > tr.bow-beneficio-propio > th {
+  background-color: orange;
+}
+.table-hover > tbody > tr > td.bow-beneficio-propio:hover,
+.table-hover > tbody > tr > th.bow-beneficio-propio:hover,
+.table-hover > tbody > tr.bow-beneficio-propio:hover > td,
+.table-hover > tbody > tr:hover > .bow-beneficio-propio,
+.table-hover > tbody > tr.bow-beneficio-propio:hover > th {
+  background-color: #e69500;
+}
+.table > thead > tr > td.bow-beneficio-modificable,
+.table > tbody > tr > td.bow-beneficio-modificable,
+.table > tfoot > tr > td.bow-beneficio-modificable,
+.table > thead > tr > th.bow-beneficio-modificable,
+.table > tbody > tr > th.bow-beneficio-modificable,
+.table > tfoot > tr > th.bow-beneficio-modificable,
+.table > thead > tr.bow-beneficio-modificable > td,
+.table > tbody > tr.bow-beneficio-modificable > td,
+.table > tfoot > tr.bow-beneficio-modificable > td,
+.table > thead > tr.bow-beneficio-modificable > th,
+.table > tbody > tr.bow-beneficio-modificable > th,
+.table > tfoot > tr.bow-beneficio-modificable > th {
+  background-color: red;
+}
+.table-hover > tbody > tr > td.bow-beneficio-modificable:hover,
+.table-hover > tbody > tr > th.bow-beneficio-modificable:hover,
+.table-hover > tbody > tr.bow-beneficio-modificable:hover > td,
+.table-hover > tbody > tr:hover > .bow-beneficio-modificable,
+.table-hover > tbody > tr.bow-beneficio-modificable:hover > th {
+  background-color: #e60000;
+}
+.table > thead > tr > td.bow-beneficio-reemplazable,
+.table > tbody > tr > td.bow-beneficio-reemplazable,
+.table > tfoot > tr > td.bow-beneficio-reemplazable,
+.table > thead > tr > th.bow-beneficio-reemplazable,
+.table > tbody > tr > th.bow-beneficio-reemplazable,
+.table > tfoot > tr > th.bow-beneficio-reemplazable,
+.table > thead > tr.bow-beneficio-reemplazable > td,
+.table > tbody > tr.bow-beneficio-reemplazable > td,
+.table > tfoot > tr.bow-beneficio-reemplazable > td,
+.table > thead > tr.bow-beneficio-reemplazable > th,
+.table > tbody > tr.bow-beneficio-reemplazable > th,
+.table > tfoot > tr.bow-beneficio-reemplazable > th {
+  background-color: yellow;
+}
+.table-hover > tbody > tr > td.bow-beneficio-reemplazable:hover,
+.table-hover > tbody > tr > th.bow-beneficio-reemplazable:hover,
+.table-hover > tbody > tr.bow-beneficio-reemplazable:hover > td,
+.table-hover > tbody > tr:hover > .bow-beneficio-reemplazable,
+.table-hover > tbody > tr.bow-beneficio-reemplazable:hover > th {
+  background-color: #e5e600;
+}
+.table > thead > tr > td.bow-beneficio-adicional,
+.table > tbody > tr > td.bow-beneficio-adicional,
+.table > tfoot > tr > td.bow-beneficio-adicional,
+.table > thead > tr > th.bow-beneficio-adicional,
+.table > tbody > tr > th.bow-beneficio-adicional,
+.table > tfoot > tr > th.bow-beneficio-adicional,
+.table > thead > tr.bow-beneficio-adicional > td,
+.table > tbody > tr.bow-beneficio-adicional > td,
+.table > tfoot > tr.bow-beneficio-adicional > td,
+.table > thead > tr.bow-beneficio-adicional > th,
+.table > tbody > tr.bow-beneficio-adicional > th,
+.table > tfoot > tr.bow-beneficio-adicional > th {
+  background-color: blue;
+}
+.table-hover > tbody > tr > td.bow-beneficio-adicional:hover,
+.table-hover > tbody > tr > th.bow-beneficio-adicional:hover,
+.table-hover > tbody > tr.bow-beneficio-adicional:hover > td,
+.table-hover > tbody > tr:hover > .bow-beneficio-adicional,
+.table-hover > tbody > tr.bow-beneficio-adicional:hover > th {
+  background-color: #0000e6;
 }
 .table-responsive {
   overflow-x: auto;
@@ -4264,7 +4348,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #cccccc;
 }
 .navbar-inverse {
-  background-color: #e51b24;
+  background-color: #484b4a;
   border-color: #2f3130;
 }
 .navbar-inverse .navbar-brand {
@@ -5064,8 +5148,11 @@ a.list-group-item-danger.active:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 .panel a {
-  color: #ffffff;
+  color: #06939c;
   text-decoration: underline;
+}
+.panel a:hover {
+  color: #53ccd4;
 }
 .panel-body {
   padding: 15px;

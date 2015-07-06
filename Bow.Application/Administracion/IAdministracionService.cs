@@ -24,6 +24,8 @@ namespace Bow.Administracion
 
         void DeletePreguntaFrecuente(DeletePreguntaFrecuenteInput paisEliminar);
 
+        PuedeEliminarPreguntaOutput PuedeEliminarPreguntaOutput(PuedeEliminarPreguntaOutputInput preguntaEliminar);
+
         void UpdatePreguntaFrecuente(UpdatePreguntaFrecuenteInput paisUpdate);
 
         GetPreguntaAleatoriaByDimensionAndJuegoOutput GetPreguntaAleatoriaByDimensionAndJuego(GetPreguntaAleatoriaByDimensionAndJuegoInput dimensionAndJuego);

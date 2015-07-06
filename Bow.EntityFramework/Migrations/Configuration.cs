@@ -1,6 +1,6 @@
-namespace Bow.Migrations
-{
+namespace Bow.Migrations {
     using Bow.Administracion.Entidades;
+    using Bow.Migrations.Data;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -12,7 +12,7 @@ namespace Bow.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Bow";
+            ContextKey = "AcrProject";
         }
 
         protected override void Seed(Bow.EntityFramework.BowDbContext context)
@@ -20,6 +20,8 @@ namespace Bow.Migrations
             cargarJuegos(context);
             cargarDimensiones(context);
             cargarTiposUsuarios(context);
+
+            new InitialDataBuilder().Build(context);
         }
 
         /// /////////////////////////////////////////////////////////////////////////////
