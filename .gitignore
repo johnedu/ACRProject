@@ -187,7 +187,4 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-#Logs
 Bow.Web/Logs/Logs.txt
-#App_Data
-Bow.Web/App_Data/

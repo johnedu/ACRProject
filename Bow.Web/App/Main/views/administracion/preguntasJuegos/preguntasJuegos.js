@@ -98,33 +98,23 @@
            * Llamado para abrir Modal para Eliminar Pregunta Frecuente
            ************************************************************************/
            vm.abrirModalEliminar = function (preguntaId) {
-               administracionService.puedeEliminarPreguntaOutput({ id: preguntaId })
-                   .success(function (data) {
-                       if (data.puedeEliminar) {
-                           var modalInstance = $modal.open({
-                               templateUrl: '/App/Main/views/administracion/preguntasJuegos/partials/modalEliminarPreguntasJuego.cshtml',
-                               controller: 'modalEliminarPreguntasJuegoController',
-                               size: 'md',
-                               resolve: {
-                                   preguntaEliminar: function () {
-                                       return preguntaId;
-                                   }
-                               }
-                           });
+                var modalInstance = $modal.open({
+                    templateUrl: '/App/Main/views/administracion/preguntasJuegos/partials/modalEliminarPreguntasJuego.cshtml',
+                    controller: 'modalEliminarPreguntasJuegoController',
+                    size: 'md',
+                    resolve: {
+                        preguntaEliminar: function () {
+                            return preguntaId;
+                        }
+                    }
+                });
 
-                           modalInstance.result.then(function () {
-                               vm.cargarPreguntas();
-                               abp.notify.success(abp.localization.localize('', 'Bow') + 'Se eliminó correctamente la pregunta', abp.localization.localize('', 'Bow') + 'Información');
-                           }, function () {
-                               vm.resultado = abp.localization.localize('', 'Bow') + 'Ocurrió un problema al actualizar la pregunta';
-                           });
-                       }
-                       else {
-                           abp.notify.error(abp.localization.localize('', 'Bow') + 'No se puede eliminar la pregunta, porque ya tiene puntajes asociados.', abp.localization.localize('' + 'Información', 'Bow'));
-                       }
-                   }).error(function (error) {
-                       $scope.mensajeError = error.message;
-                   });
+                modalInstance.result.then(function () {
+                    vm.cargarPreguntas();
+                    abp.notify.success(abp.localization.localize('', 'Bow') + 'Se eliminó correctamente la pregunta', abp.localization.localize('', 'Bow') + 'Información');
+                }, function () {
+                    vm.resultado = abp.localization.localize('', 'Bow') + 'Ocurrió un problema al actualizar la pregunta';
+                });
            }
 
            /************************************************************************

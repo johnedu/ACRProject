@@ -8,7 +8,7 @@
 
     abpModule.config([
         '$httpProvider', function ($httpProvider) {
-            $httpProvider.interceptors.push(['$q', function ($q) {
+            $httpProvider.interceptors.push([ '$q', function ($q) {
 
                 var defaultError = {
                     message: 'Ajax request is not succeed!',
@@ -37,12 +37,11 @@
                             response.data = originalData.result;
                             defer.resolve(response);
                         } else { //data.success === false
-                            var messagePromise = null;
                             if (originalData.error) {
                                 if (originalData.error.details) {
-                                    messagePromise = abp.message.error(originalData.error.details, originalData.error.message);
+                                    abp.message.error(originalData.error.details, originalData.error.message);
                                 } else {
-                                    messagePromise = abp.message.error(originalData.error.message);
+                                    abp.message.error(originalData.error.message);
                                 }
                             } else {
                                 originalData.error = defaultError;
@@ -54,24 +53,12 @@
                             defer.reject(response);
 
                             if (originalData.unAuthorizedRequest && !originalData.targetUrl) {
-                                if (messagePromise) {
-                                    messagePromise.done(function () {
-                                        location.reload();
-                                    });
-                                } else {
-                                    location.reload();
-                                }
+                                location.reload();
                             }
                         }
 
                         if (originalData.targetUrl) {
-                            if (messagePromise) {
-                                messagePromise.done(function () {
-                                    location.href = originalData.targetUrl;
-                                });
-                            } else {
-                                location.href = originalData.targetUrl;
-                            }
+                            location.href = originalData.targetUrl;
                         }
 
                         return defer.promise;

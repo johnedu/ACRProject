@@ -22,6 +22,5 @@
         //  Tipos de usuario
         public const string TIPO_USUARIO_PPR = "PPR";
         public const string TIPO_USUARIO_PROFESIONAL = "Profesional Reintegrador";
-
     }
 }

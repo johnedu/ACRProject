@@ -5,7 +5,7 @@
             <h3>( {{juego}} )</h3>
         </div>
         <div class="col-md-2 text-right">
-            <button class="btn btn-danger fa fa-close" ng-click="cancelModal()"></button>
+            <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="cancelModal()"></button>
         </div>
     </div>
 </div>
@@ -30,8 +30,8 @@
                             <thead>
                                 <tr>
                                     <th>@L("")Texto</th>
-                                    <th class="text-center" ng-show="juego == 'Millonario'">@L("")Aplica Comodin 50/50</th>
-                                    <th class="text-center">@L("")Respuesta Correcta</th>
+                                    <th class="text-center" ng-show="juego == 'Millonario'">@L("")Comodin 50/50</th>
+                                    <th class="text-center">@L("")Correcta</th>
                                     <th class="text-center">@L("")Editar</th>
                                     <th class="text-center">@L("")Eliminar</th>
                                 </tr>
@@ -42,16 +42,16 @@
                                         <strong>{{respuesta.texto}}</strong>
                                     </td>
                                     <td class="text-center" ng-show="juego == 'Millonario'">
-                                        <span ng-show="respuesta.comodin50_50" class="fa fa-check fa-2x"></span>
+                                        <span ng-show="respuesta.comodin50_50" class="glyphicon glyphicon-check"></span>
                                     </td>
                                     <td class="text-center">
-                                        <span ng-show="respuesta.respuestaVerdadera" class="fa fa-check fa-2x"></span>
+                                        <span ng-show="respuesta.respuestaVerdadera" class="glyphicon glyphicon-check"></span>
                                     </td>
                                     <td class="text-center">
-                                        <a class="clickable" ng-click="mostrarFormularioEditarRespuesta(respuesta.id)" title="@L("")Editar"><span class="fa fa-pencil fa-2x"></span></a>
+                                        <a ng-click="mostrarFormularioEditarRespuesta(respuesta.id)" title="@L("")Editar"><span class="glyphicon glyphicon-pencil"></span></a>
                                     </td>
                                     <td class="text-center">
-                                        <a class="clickable" ng-click="eliminarRespuesta($index)" ng-show="!mensajeEliminar[$index]" title="@L("")Eliminar la respuesta"><span class="fa fa-trash fa-2x"></span></a>
+                                        <a ng-click="eliminarRespuesta($index)" ng-show="!mensajeEliminar[$index]" title="@L("")Eliminar la respuesta"><span class="glyphicon glyphicon-trash"></span></a>
                                         <div ng-show="mensajeEliminar[$index]">
                                             @L("")¿Está seguro?<br />
                                             <button class="btn btn-success btn-xs" ng-click="eliminarRespuestaOk(respuesta.id, $index)">@L("")Si</button>
@@ -62,6 +62,13 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="text-center">
+                    <pagination items-per-page="respuestasPregunta.filasPorPagina"
+                                total-items="respuestasPregunta.totalFilas"
+                                ng-model="respuestasPregunta.paginaActual"
+                                ng-change="respuestasPregunta.pageChanged()"
+                                class="pagination-sm"></pagination>
                 </div>
             </div>
             <div ng-show="mostrarFormulario">
@@ -77,21 +84,17 @@
                     </div>
                     <div class="row" ng-show="juego == 'Millonario'">
                         <div class="col-md-6">
-                            <div class="checkbox c-checkbox needsclick">
-                                <label class="needsclick">
-                                    <input type="checkbox" value="" class="needsclick" ng-model="respuesta.comodin50_50">
-                                    <span class="fa fa-check"></span>@L("")Aplica para el comodin 50/50
-                                </label>
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" ng-model="respuesta.comodin50_50" />&nbsp;&nbsp;&nbsp;
+                                <label class="control-label">@L("")Comodin 50/50</label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="checkbox c-checkbox needsclick">
-                                <label class="needsclick">
-                                    <input type="checkbox" value="" class="needsclick" ng-model="respuesta.respuestaVerdadera">
-                                    <span class="fa fa-check"></span>@L("")Es la respuesta correcta de la pregunta
-                                </label>
+                            <div class="form-group">
+                                <input type="checkbox" class="checkbox-inline" ng-model="respuesta.respuestaVerdadera" />&nbsp;&nbsp;&nbsp;
+                                <label class="control-label">@L("")Respuesta Correcta</label>
                             </div>
                         </div>
                     </div>
